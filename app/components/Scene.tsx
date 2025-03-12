@@ -1,9 +1,9 @@
 "use client"
 import React, { Suspense, useEffect, useState } from 'react'
 import * as THREE from 'three'
-import { Canvas, useFrame, useThree } from "@react-three/fiber"
+import { Canvas, useFrame } from "@react-three/fiber"
 import { Model } from "./Model"
-import { Environment, MeshReflectorMaterial, Stage, useTexture } from "@react-three/drei"
+import { Environment, MeshReflectorMaterial, Stage } from "@react-three/drei"
 
 function PreLoad({ start, set }: { start: boolean, set: React.Dispatch<React.SetStateAction<boolean>> }) {
     const [vec] = useState(() => new THREE.Vector3())
@@ -19,7 +19,7 @@ function PreLoad({ start, set }: { start: boolean, set: React.Dispatch<React.Set
     return useFrame((state) => {
       if (start) {
         
-        state.camera.position.lerp(vec.set(state.mouse.x * 5, 3 + state.mouse.y * 2, 14), 0.05)
+        state.camera.position.lerp(vec.set(state.mouse.x * 4, 3 + state.mouse.y * 2, 14), 0.05)
         state.camera.lookAt(0, 0, 0)
       }
     })
@@ -28,7 +28,7 @@ function PreLoad({ start, set }: { start: boolean, set: React.Dispatch<React.Set
 function Ground() {
     
 
-    const [floor, normal] = useTexture(['/SurfaceImperfections003_2K-PNG_Color.png', '/SurfaceImperfections003_1K_Normal.jpg'])
+    // const [floor, normal] = useTexture(['/SurfaceImperfections003_2K-PNG_Color.png', '/SurfaceImperfections003_1K_Normal.jpg'])
     return (
   
       <mesh rotation={[-Math.PI / 2, 0, Math.PI / 2]} position={[0, 0, 0]} receiveShadow>
@@ -56,6 +56,7 @@ const Scene = () => {
 
   return (
     <Canvas shadows={"basic"} gl={{ alpha: false }} camera={{ position: [0, 5, 2], fov: 15 }}>
+        <Suspense fallback={null} >
         <color attach="background" args={['#050505']} />
         <fog attach="fog" args={['#050505', 15, 20]} />
         <group position={[0,0,-1.5]} scale={0.8}>
@@ -70,7 +71,7 @@ const Scene = () => {
         <directionalLight position={[-50, 0, -40]} intensity={0.7} />
         <Environment preset="city"/>
         <PreLoad start={ready} set={setReady} />
-        
+        </Suspense>
     </Canvas>
   )
 }
