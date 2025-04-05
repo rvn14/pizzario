@@ -11,7 +11,7 @@ interface PreLoadProps {
     set: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function PreLoad({ start, set }: PreLoadProps) {
+function PreLoad({  }: PreLoadProps) {
     const [vec] = useState(() => new THREE.Vector3())
   
     useFrame((state) => {
