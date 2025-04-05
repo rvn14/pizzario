@@ -11,7 +11,7 @@ const About = () => {
                 <div className='text-white font-poppins font-extralight text-sm sm:text-md mt-4 sm:mt-6'>Welcome to <span className='font-ragas'>PIZZAR.3IO</span>, We&apos;re all about crafting delicious, hand-tossed pizzas made with fresh ingredients and a whole lot of love. Whether you&apos;re here for a classic favorite or something new, every bite is made to delight. Come on in, grab a slice, and let&apos;s make your pizza dreams come true!</div>
           </div>
         </div>
-        <div className='order-2 md:order-2 h-[500px] md:h-full'>
+        <div className='order-2 md:order-2 h-[400px] md:h-full'>
             <Scene/>
         </div>
     </div>

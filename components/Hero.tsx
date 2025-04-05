@@ -6,9 +6,7 @@ const Hero = () => {
        <section className='relative w-full min-h-screen bg-primary flex items-center justify-center bg-cover bg-center hero-bg'>
         <div className='absolute w-full h-full bg-primary/80'></div>
         
-        {/* Pizza decoration elements */}
-        <div className='absolute top-20 left-10 w-24 h-24 rounded-full bg-tomato/30 hidden md:block'></div>
-        <div className='absolute bottom-20 right-10 w-32 h-32 rounded-full bg-tomato/20 hidden md:block'></div>
+        
         
          <div className='absolute text-center px-4 sm:px-6 md:px-8 max-w-4xl mx-auto'>
              <h1 className='text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-ragas text-tomato font-bold'>PIZZAR.3IO</h1>
