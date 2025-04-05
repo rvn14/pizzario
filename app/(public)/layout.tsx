@@ -1,11 +1,15 @@
-import Navbar from "../components/Navbar";
+
+import Navbar from '@/components/Navbar';
+import { ReactLenis } from 'lenis/react'
 
 
 export default function Layout({ children }: Readonly<{ children: React.ReactNode;}>) {
   return (
-    <main className="font-work-sans antialiased">
+    <ReactLenis root> 
+    <main className="antialiased flex flex-col items-center ">
         <Navbar />
         {children}
     </main>
+    </ReactLenis>
   );
 }
