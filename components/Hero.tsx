@@ -18,22 +18,22 @@ const Hero = () => {
              </p>
              
              <div className='flex flex-col sm:flex-row gap-4 justify-center items-center'>
-               <Link href="/menu" className='px-6 py-3 bg-tomato text-white font-chunk rounded-full hover:bg-tomato/80 transition-all duration-300 text-base sm:text-lg'>
-                 View Our Menu
+               <Link href="/menu" className='px-6 py-3 bg-tomato text-white font-poppins font-semibold rounded-full hover:bg-tomato/80 transition-all duration-300 text-base sm:text-lg'>
+                 Our Menu
                </Link>
-               <Link href="/order" className='px-6 py-3 bg-white text-tomato font-chunk rounded-full hover:bg-white/90 transition-all duration-300 text-base sm:text-lg'>
+               <Link href="/order" className='px-6 py-3 bg-white text-tomato font-poppins font-semibold rounded-full hover:bg-white/90 transition-all duration-300 text-base sm:text-lg'>
                  Order Now
                </Link>
              </div>
              
              <div className='mt-12 flex items-center justify-center gap-6'>
-               <div className='w-10 h-10 rounded-full bg-white/10 flex items-center justify-center'>
+               <div className='w-10 h-10 rounded-full bg-white/10 flex items-center justify-center cursor-pointer'>
                  <span className='text-white'>🍕</span>
                </div>
-               <div className='w-10 h-10 rounded-full bg-white/10 flex items-center justify-center'>
+               <div className='w-10 h-10 rounded-full bg-white/10 flex items-center justify-center cursor-pointer'>
                  <span className='text-white'>🧀</span>
                </div>
-               <div className='w-10 h-10 rounded-full bg-white/10 flex items-center justify-center'>
+               <div className='w-10 h-10 rounded-full bg-white/10 flex items-center justify-center cursor-pointer'>
                  <span className='text-white'>🍅</span>
                </div>
              </div>
