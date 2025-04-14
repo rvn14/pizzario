@@ -6,9 +6,7 @@ const Hero = () => {
        <section className='relative w-full min-h-screen bg-primary flex items-center justify-center bg-cover bg-center hero-bg'>
         <div className='absolute w-full h-full bg-primary/80'></div>
         
-        {/* Pizza decoration elements */}
-        <div className='absolute top-20 left-10 w-24 h-24 rounded-full bg-tomato/30 hidden md:block'></div>
-        <div className='absolute bottom-20 right-10 w-32 h-32 rounded-full bg-tomato/20 hidden md:block'></div>
+        
         
          <div className='absolute text-center px-4 sm:px-6 md:px-8 max-w-4xl mx-auto'>
              <h1 className='text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-ragas text-tomato font-bold'>PIZZAR.3IO</h1>
@@ -20,22 +18,22 @@ const Hero = () => {
              </p>
              
              <div className='flex flex-col sm:flex-row gap-4 justify-center items-center'>
-               <Link href="/menu" className='px-6 py-3 bg-tomato text-white font-chunk rounded-full hover:bg-tomato/80 transition-all duration-300 text-base sm:text-lg'>
-                 View Our Menu
+               <Link href="/menu" className='px-6 py-3 bg-tomato text-white font-poppins font-semibold rounded-full hover:bg-tomato/80 transition-all duration-300 text-base sm:text-lg'>
+                 Our Menu
                </Link>
-               <Link href="/order" className='px-6 py-3 bg-white text-tomato font-chunk rounded-full hover:bg-white/90 transition-all duration-300 text-base sm:text-lg'>
+               <Link href="/order" className='px-6 py-3 bg-white text-tomato font-poppins font-semibold rounded-full hover:bg-white/90 transition-all duration-300 text-base sm:text-lg'>
                  Order Now
                </Link>
              </div>
              
              <div className='mt-12 flex items-center justify-center gap-6'>
-               <div className='w-10 h-10 rounded-full bg-white/10 flex items-center justify-center'>
+               <div className='w-10 h-10 rounded-full bg-white/10 flex items-center justify-center cursor-pointer'>
                  <span className='text-white'>🍕</span>
                </div>
-               <div className='w-10 h-10 rounded-full bg-white/10 flex items-center justify-center'>
+               <div className='w-10 h-10 rounded-full bg-white/10 flex items-center justify-center cursor-pointer'>
                  <span className='text-white'>🧀</span>
                </div>
-               <div className='w-10 h-10 rounded-full bg-white/10 flex items-center justify-center'>
+               <div className='w-10 h-10 rounded-full bg-white/10 flex items-center justify-center cursor-pointer'>
                  <span className='text-white'>🍅</span>
                </div>
              </div>
