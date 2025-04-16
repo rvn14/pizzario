@@ -119,7 +119,7 @@ const Navbar = () => {
                 </Link>
               </Button>
               <Button asChild className="bg-tomato hover:bg-tomato/80 text-primary font-poppins">
-                <Link href="/auth/signup">Signup</Link>
+                <Link href="/signup">Signup</Link>
               </Button>
             </div>
           </nav>
