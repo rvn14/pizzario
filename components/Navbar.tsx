@@ -11,10 +11,10 @@ const Navbar = () => {
   const navContainerRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const lastScrollYRef = useRef(0); // New ref to track last scroll position
+  const isNavVisibleRef = useRef(true); // New ref to track visibility without state updates
 
   const { y: currentScrollY } = useWindowScroll();
   const [isNavVisible, setIsNavVisible] = useState(true);
-  // Remove the lastScrollY state
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Toggle mobile menu
@@ -28,23 +28,30 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+    // Only update state if the visibility actually needs to change
+    let shouldBeVisible = isNavVisibleRef.current;
+    
     if (currentScrollY === 0) {
       // Topmost position: show navbar without floating-nav
-      setIsNavVisible(true);
+      shouldBeVisible = true;
       navContainerRef.current?.classList.remove("floating-nav-black");
     } else if (currentScrollY > lastScrollYRef.current) {
       // Scrolling down: hide navbar and apply floating-nav
-      setIsNavVisible(false);
+      shouldBeVisible = false;
       navContainerRef.current?.classList.add("floating-nav-black");
     } else if (currentScrollY < lastScrollYRef.current) {
       // Scrolling up: show navbar with floating-nav
-      setIsNavVisible(true);
+      shouldBeVisible = true;
       navContainerRef.current?.classList.add("floating-nav-black");
     }
 
-    // Update the ref instead of state
+    // Only set state if visibility actually changed
+    if (shouldBeVisible !== isNavVisibleRef.current) {
+      isNavVisibleRef.current = shouldBeVisible;
+      setIsNavVisible(shouldBeVisible);
+    }
+
     lastScrollYRef.current = currentScrollY;
-    // Remove lastScrollY from the dependency array
   }, [currentScrollY]);
 
   useEffect(() => {
@@ -112,7 +119,7 @@ const Navbar = () => {
                 </Link>
               </Button>
               <Button asChild className="bg-tomato hover:bg-tomato/80 text-primary font-poppins">
-                <Link href="/login">Signup</Link>
+                <Link href="/auth/signup">Signup</Link>
               </Button>
             </div>
           </nav>
@@ -150,7 +157,7 @@ const Navbar = () => {
           <div className="flex gap-4">
             
             <Button asChild className="bg-tomato hover:bg-tomato/80 text-primary font-poppins">
-              <Link href="/login" onClick={handleNavigation}>Signup</Link>
+              <Link href="auth/signup" onClick={handleNavigation}>Signup</Link>
             </Button>
           </div>
         </div>
