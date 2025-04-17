@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 import gsap from "gsap";
 import { useWindowScroll } from "react-use";
