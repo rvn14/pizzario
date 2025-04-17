@@ -8,7 +8,7 @@ import { Model } from "./Model";
 
 
 
-function MouseTracker() {
+function MouseTracker({ rotateX }: { rotateX: number }) {
   // Create a ref for a target vector to store our desired camera position
   const targetVec = useRef(new THREE.Vector3());
   const { camera, mouse } = useThree();
@@ -16,7 +16,7 @@ function MouseTracker() {
   // Update camera position every frame based on mouse movements using lerp for smooth transitions
   useFrame(() => {
     
-    const targetX = mouse.x * 1.5;       
+    const targetX = rotateX + mouse.x * 1.5;       
     const targetY = 3 + mouse.y * 1;       
     const targetZ = 14;                 
 
@@ -53,12 +53,16 @@ function Ground() {
   );
 }
 
-const Scene = () => {
+interface SceneProps {
+  rotateX: number;
+}
+
+const Scene = ({ rotateX }: SceneProps) => {
 
   return (
     <Canvas shadows="soft" gl={{ alpha: true }} camera={{ position: [0, 3, 14], fov: 15 }}>
       {/* Integrate MouseTracker to update camera per frame */}
-      <MouseTracker />
+      <MouseTracker rotateX={rotateX} />
       <Suspense fallback={
         <Html center className="text-white fixed">
             <div className="fixed w-full h-full top-0 left-0 z-0 flex items-center justify-center bg-black">
@@ -67,7 +71,7 @@ const Scene = () => {
         </Html>}>
         <color attach="background" args={['#050505']} />
         <fog attach="fog" args={['#050505', 15, 20]} />
-        <group position={[0, 0.3, 0]} scale={0.6}>
+        <group position={[0, 0.3, 0]} scale={0.65}>
           <Stage
             adjustCamera={false}
             intensity={0.4}
