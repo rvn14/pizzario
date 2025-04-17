@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Provider from "./Provider";
-
-
+import Preloader from "@/components/Preloader";
 
 export const metadata: Metadata = {
   title: "Pizzario",
@@ -14,16 +13,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-
-  
-
   return (
     <html lang="en">
       <body
         className={`antialiased`}
       >
-        <Provider>{children}</Provider>
+        <Provider>
+          <Preloader />
+          {children}
+        </Provider>
       </body>
     </html>
   );
