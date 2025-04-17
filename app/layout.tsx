@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Provider from "./Provider";
-import Preloader from "@/components/Preloader";
+
 
 export const metadata: Metadata = {
   title: "Pizzario",
@@ -19,7 +19,7 @@ export default function RootLayout({
         className={`antialiased`}
       >
         <Provider>
-          <Preloader />
+          
           {children}
         </Provider>
       </body>
