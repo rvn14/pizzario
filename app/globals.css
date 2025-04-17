@@ -10,6 +10,24 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar{
+  display: none;
+}
+
+body {
+  background-color: #050505;
+  transition-property: opacity, transform, filter, background;
+  transition-timing-function: ease-in-out;
+  transition-duration: 500ms;
+}
+
+.page-transition {
+  opacity: 0;
+  background: #050505;
+  transform: translateY(-40px);
+  filter: blur(12px);
+}
+
 @theme inline {
   --color-primary: #050505;
 

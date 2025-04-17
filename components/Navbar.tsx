@@ -7,6 +7,7 @@ import Link from "next/link";
 import { ShoppingCartIcon, Menu, X } from "lucide-react";
 import { Button } from "./ui/button";
 import axios from "axios";
+import { TransitionLink } from "./utils/TransitionLink";
 
 const Navbar = () => {
   // Refs for navigation container
@@ -125,18 +126,20 @@ const Navbar = () => {
         <header className="absolute top-1/2 w-full -translate-y-1/2">
           <nav className="flex size-full items-center justify-between p-4">
             {/* Logo and Product button */}
-            <Link href={"/"} className="flex flex-col items-center ml-5">
+            <TransitionLink href={"/"}>
+            <div className="flex flex-col items-center ml-5">
               <div className="font-ragas text-blue-50 font-black text-2xl pointer-events-none select-none">PIZZAR.3IO</div>
               <div className="font-chunk text-blue-50 text-xs pointer-events-none select-none -mt-2">EST. 1995</div>
-            </Link>
+            </div>
+            </TransitionLink>
 
             {/* Hamburger menu button - visible on mobile */}
             <div className="md:hidden flex items-center gap-4">
             <Button asChild variant="outline" className="relative text-tomato bg-transparent border-2 border-tomato rounded-2xl hover:bg-tomato hover:text-primary">
-              <Link href="/cart" onClick={handleNavigation}>
+              <TransitionLink href="/cart" onClick={handleNavigation}>
                 <ShoppingCartIcon/>
                 <div className="red-dot z-20 absolute top-0 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
-              </Link>
+              </TransitionLink>
             </Button>
               <Button 
                 variant="ghost" 
@@ -151,20 +154,26 @@ const Navbar = () => {
 
             {/* Navigation Links - visible on desktop */}
             <div className="hidden md:flex h-full items-center justify-between mr-5 space-x-5">
-              <Link href="/" className="text-white font-poppin text-md nav-hover-btn">Home</Link>
-              <Link href="/menu" className="text-white font-poppin text-md nav-hover-btn">Menu</Link>
-              <Link href="/contact" className="text-white font-poppin text-md nav-hover-btn">Contact</Link>
+              <div className="text-white font-poppin text-md nav-hover-btn">
+                <TransitionLink href="/">Home</TransitionLink>
+              </div>
+              <div className="text-white font-poppin text-md nav-hover-btn">
+                <TransitionLink href="/menu">Menu</TransitionLink>
+              </div>
+              <div className="text-white font-poppin text-md nav-hover-btn">
+                <TransitionLink href="/contact">Contact</TransitionLink>
+              </div>
               
               <Button asChild variant="outline" className="relative text-tomato bg-transparent border-2 border-tomato rounded-2xl hover:bg-tomato hover:text-primary">
-                <Link href="/cart">
+                <TransitionLink href="/cart">
                   <ShoppingCartIcon/>
                   <div className="red-dot z-20 absolute top-0 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
-                </Link>
+                </TransitionLink>
               </Button>
               {isLogged?<Button onClick={handleLogout} asChild className="bg-tomato hover:bg-tomato/80 text-primary font-poppins">
-                <Link href="">Logout</Link>
+                <TransitionLink href="">Logout</TransitionLink>
               </Button>:<Button asChild className="bg-tomato hover:bg-tomato/80 text-primary font-poppins">
-                <Link href="/signup">Signup</Link>
+                <TransitionLink href="/signup">Signup</TransitionLink>
               </Button>}
             </div>
           </nav>
@@ -177,27 +186,32 @@ const Navbar = () => {
         className="fixed inset-0 bg-black/95 z-40 flex flex-col items-center justify-center transform -translate-y-full opacity-0"
       >
         <div className="flex flex-col items-center space-y-6 p-8">
+          <div className="text-white font-poppin text-xl nav-hover-btn">
           <Link 
             href="/" 
-            className="text-white font-poppin text-xl nav-hover-btn"
             onClick={handleNavigation}
           >
             Home
           </Link>
+          </div>
+
+          <div className="text-white font-poppin text-xl nav-hover-btn">
           <Link 
             href="/menu" 
-            className="text-white font-poppin text-xl nav-hover-btn"
             onClick={handleNavigation}
           >
             Menu
           </Link>
+          </div>
+
+          <div className="text-white font-poppin text-xl nav-hover-btn">
           <Link 
             href="/contact" 
-            className="text-white font-poppin text-xl nav-hover-btn"
             onClick={handleNavigation}
           >
             Contact
           </Link>
+          </div>
           
           <div className="flex gap-4">
             
