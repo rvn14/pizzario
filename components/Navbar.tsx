@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ShoppingCartIcon, Menu, X } from "lucide-react";
 import { Button } from "./ui/button";
+import axios from "axios";
 
 const Navbar = () => {
   // Refs for navigation container
@@ -14,8 +15,10 @@ const Navbar = () => {
   const isNavVisibleRef = useRef(true); // New ref to track visibility without state updates
 
   const { y: currentScrollY } = useWindowScroll();
+  const [isLogged, setIsLogged] = useState(false);
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [userData, setUserData] = useState({})
 
   // Toggle mobile menu
   const toggleMobileMenu = () => {
@@ -74,6 +77,45 @@ const Navbar = () => {
     }
   }, [isMobileMenuOpen]);
 
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await axios.get('/api/auth/me', {
+          withCredentials: true
+        });
+        console.log("Auth check response: ", res.data.authenticated);
+        const checkedauth = res.data.authenticated;
+        setUserData(res.data.user);
+
+        if (checkedauth) {
+          setIsLogged(true);
+          
+          
+        }
+        // Don't log isLogged here as it won't reflect the updated state yet
+      } catch (error) {
+        console.error('checkAuth failed', error);
+        setIsLogged(false);
+      }
+    }
+
+    checkAuth();
+  }, [isLogged]);
+
+  const handleLogout = async () => {
+    try {
+      const res = await axios.post('/api/auth/logout', {}, {
+        withCredentials: true
+      });
+      console.log("Logout response: ", res.data);
+      setIsLogged(false);
+    } catch (error) {
+      console.error('Logout failed', error);
+    }
+  }  
+    
+  
+
   return (
     <>
       <div
@@ -82,10 +124,10 @@ const Navbar = () => {
         <header className="absolute top-1/2 w-full -translate-y-1/2">
           <nav className="flex size-full items-center justify-between p-4">
             {/* Logo and Product button */}
-            <div className="flex flex-col items-center ml-5">
+            <Link href={"/"} className="flex flex-col items-center ml-5">
               <div className="font-ragas text-blue-50 font-black text-2xl pointer-events-none select-none">PIZZAR.3IO</div>
               <div className="font-chunk text-blue-50 text-xs pointer-events-none select-none -mt-2">EST. 1995</div>
-            </div>
+            </Link>
 
             {/* Hamburger menu button - visible on mobile */}
             <div className="md:hidden flex items-center gap-4">
@@ -118,9 +160,11 @@ const Navbar = () => {
                   <div className="red-dot z-20 absolute top-0 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
                 </Link>
               </Button>
-              <Button asChild className="bg-tomato hover:bg-tomato/80 text-primary font-poppins">
+              {isLogged?<Button onClick={handleLogout} asChild className="bg-tomato hover:bg-tomato/80 text-primary font-poppins">
+                <Link href="">Logout</Link>
+              </Button>:<Button asChild className="bg-tomato hover:bg-tomato/80 text-primary font-poppins">
                 <Link href="/signup">Signup</Link>
-              </Button>
+              </Button>}
             </div>
           </nav>
         </header>
