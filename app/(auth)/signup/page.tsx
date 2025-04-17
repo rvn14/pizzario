@@ -2,10 +2,10 @@
 "use client";
 import React, { Suspense, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import axios from 'axios';
 import { signupSchema, type SignupFormData } from '@/lib//rules';
 import Scene from '@/components/Scene';
+import { TransitionLink } from '@/components/utils/TransitionLink';
 
 const SignupPage = () => {
   const router = useRouter();
@@ -73,18 +73,18 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="justify-center items-center h-screen bg-primary grid grid-cols-1 md:grid-cols-2 gap-4 px-8 md:px-16">
+    <div className="justify-center items-center h-screen bg-primary grid grid-cols-1 md:grid-cols-2 gap-4 px-8 md:px-16 text-white">
       
       <div className='h-screen w-full bg-primary hidden md:block'>
           <Suspense>
             <Scene rotateX={-3} />
           </Suspense>
       </div>
-      <div className="relative z-10 flex items-center justify-center h-screen">
-        <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+      <div className="relative z-10 flex items-center justify-center h-screen ">
+        <div className="w-full max-w-md p-8 space-y-8  rounded-lg shadow-md">
           <div className="text-center">
-            <h1 className="text-3xl font-extrabold text-gray-900">Create an Account</h1>
-            <p className="mt-2 text-gray-600">Sign up to get started with Pizzario</p>
+            <h1 className="text-3xl font-extrabold text-tomato">Create an Account</h1>
+            <p className="mt-2 text-gray-300">Sign up to get started with Pizzario</p>
           </div>
           
           {serverError && (
@@ -95,7 +95,7 @@ const SignupPage = () => {
           
           <form className="mt-8 space-y-6" onSubmit={handleSubmit} noValidate>
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="name" className="block text-sm font-medium text-gray-400">
                 User Name
               </label>
               <input
@@ -105,7 +105,7 @@ const SignupPage = () => {
                 required
                 value={formData.name}
                 onChange={handleChange}
-                className={`mt-1 block w-full px-3 py-2 border ${errors.name ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
+                className={`mt-1 block w-full px-3 py-2 border ${errors.name ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-tomato focus:border-tomato`}
               />
               {errors.name && (
                 <p className="mt-1 text-sm text-red-600">{errors.name}</p>
@@ -113,7 +113,7 @@ const SignupPage = () => {
             </div>
             
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-400">
                 Email
               </label>
               <input
@@ -123,7 +123,7 @@ const SignupPage = () => {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                className={`mt-1 block w-full px-3 py-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
+                className={`mt-1 block w-full px-3 py-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-tomato focus:border-tomato`}
               />
               {errors.email && (
                 <p className="mt-1 text-sm text-red-600">{errors.email}</p>
@@ -131,7 +131,7 @@ const SignupPage = () => {
             </div>
             
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-400">
                 Password
               </label>
               <input
@@ -141,7 +141,7 @@ const SignupPage = () => {
                 required
                 value={formData.password}
                 onChange={handleChange}
-                className={`mt-1 block w-full px-3 py-2 border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
+                className={`mt-1 block w-full px-3 py-2 border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-tomato focus:border-tomato`}
               />
               {errors.password && (
                 <p className="mt-1 text-sm text-red-600">{errors.password}</p>
@@ -149,7 +149,7 @@ const SignupPage = () => {
             </div>
             
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-400">
                 Confirm Password
               </label>
               <input
@@ -159,7 +159,7 @@ const SignupPage = () => {
                 required
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className={`mt-1 block w-full px-3 py-2 border ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
+                className={`mt-1 block w-full px-3 py-2 border ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-tomato focus:border-tomato`}
               />
               {errors.confirmPassword && (
                 <p className="mt-1 text-sm text-red-600">{errors.confirmPassword}</p>
@@ -170,7 +170,7 @@ const SignupPage = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${isLoading ? 'bg-indigo-400' : 'bg-indigo-600 hover:bg-indigo-700'} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+                className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white cursor-pointer ${isLoading ? 'bg-tomato' : 'bg-tomato hover:bg-tomato/80'} focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-white`}
               >
                 {isLoading ? 'Signing Up...' : 'Sign Up'}
               </button>
@@ -178,11 +178,13 @@ const SignupPage = () => {
           </form>
           
           <div className="text-center mt-4">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-200">
               Already have an account?{' '}
-              <Link href="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
+              <TransitionLink href="/login" >
+              <span className="font-medium text-tomato hover:text-tomato/80">
                 Log in
-              </Link>
+              </span>
+              </TransitionLink>
             </p>
           </div>
         </div>

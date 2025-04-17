@@ -1,10 +1,10 @@
 "use client";
 
 import { Suspense, useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Scene from "@/components/Scene";
+import { TransitionLink } from "@/components/utils/TransitionLink";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -48,12 +48,17 @@ export default function LoginPage() {
           <Scene rotateX={3} />
         </Suspense>
       </div>
-      <div className="flex items-center justify-center h-screen order-1">
-        <div className="w-full max-w-md space-y-8 rounded-lg bg-white p-8 shadow-md">
+      <div className="flex items-center justify-center h-screen order-1 text-white">
+        <div className="w-full max-w-md space-y-8 rounded-lg  p-8 shadow-md">
           <div>
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-tomato">
               Sign in to your account
             </h2>
+            <p className="mt-2 text-center text-sm text-gray-300">
+
+              Sign in to get started with Pizzario. 
+            </p>
+
           </div>
           
           {error && (
@@ -62,11 +67,11 @@ export default function LoginPage() {
             </div>
           )}
           
-          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          <form className="mt-8 space-y-6" onSubmit={handleSubmit} noValidate>
             <div className="space-y-4 rounded-md shadow-sm">
               <div>
-                <label htmlFor="email" className="sr-only">
-                  Email address
+                <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-400">
+                  Email
                 </label>
                 <input
                   id="email"
@@ -76,13 +81,13 @@ export default function LoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-500 focus:z-10 focus:border-tomato focus:outline-none focus:ring-tomato"
                   placeholder="Email address"
                 />
               </div>
               
               <div>
-                <label htmlFor="password" className="sr-only">
+                <label htmlFor="password" className="block text-sm font-medium mb-2 text-gray-400">
                   Password
                 </label>
                 <input
@@ -93,7 +98,7 @@ export default function LoginPage() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-500 focus:z-10 focus:border-tomato focus:outline-none focus:ring-tomato"
                   placeholder="Password"
                 />
               </div>
@@ -105,15 +110,15 @@ export default function LoginPage() {
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  className="h-4 w-4 rounded border-gray-300 text-tomato focus:ring-tomato cursor-pointer"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-200">
                   Remember me
                 </label>
               </div>
 
               <div className="text-sm">
-                <a href="#" className="font-medium text-blue-600 hover:text-blue-500">
+                <a href="#" className="font-medium text-tomato/80 hover:text-tomato">
                   Forgot your password?
                 </a>
               </div>
@@ -123,18 +128,18 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="group relative flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="group relative flex w-full justify-center rounded-md border border-transparent bg-tomato py-2 px-4 text-sm font-medium text-white hover:bg-tomato/80 focus:outline-none focus:ring-1 focus:ring-white focus:ring-offset-0 cursor-pointer"
               >
                 {isLoading ? "Signing in..." : "Sign in"}
               </button>
             </div>
 
-            <div className="text-center text-sm">
+            <div className="text-center text-sm text-amber-50">
               <p>
                 Don&apos;t have an account?{" "}
-                <Link href="/signup" className="font-medium text-blue-600 hover:text-blue-500">
-                  Register here
-                </Link>
+                <TransitionLink href="/signup" >
+                <span className="font-medium text-tomato/80 hover:text-tomato">Register here</span>
+                </TransitionLink>
               </p>
             </div>
           </form>
