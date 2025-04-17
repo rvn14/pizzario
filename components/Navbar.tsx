@@ -171,7 +171,7 @@ const Navbar = () => {
                 </TransitionLink>
               </Button>
               {isLogged?<Button onClick={handleLogout} asChild className="bg-tomato hover:bg-tomato/80 text-primary font-poppins">
-                <TransitionLink href="">Logout</TransitionLink>
+                <Link href="">Logout</Link>
               </Button>:<Button asChild className="bg-tomato hover:bg-tomato/80 text-primary font-poppins">
                 <TransitionLink href="/signup">Signup</TransitionLink>
               </Button>}

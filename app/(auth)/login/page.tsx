@@ -48,12 +48,17 @@ export default function LoginPage() {
           <Scene rotateX={3} />
         </Suspense>
       </div>
-      <div className="flex items-center justify-center h-screen order-1">
+      <div className="flex items-center justify-center h-screen order-1 text-white">
         <div className="w-full max-w-md space-y-8 rounded-lg  p-8 shadow-md">
           <div>
             <h2 className="mt-6 text-center text-3xl font-extrabold text-tomato">
               Sign in to your account
             </h2>
+            <p className="mt-2 text-center text-sm text-gray-300">
+
+              Sign in to get started with Pizzario. 
+            </p>
+
           </div>
           
           {error && (
@@ -76,7 +81,7 @@ export default function LoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-tomato focus:outline-none focus:ring-tomato"
+                  className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-500 focus:z-10 focus:border-tomato focus:outline-none focus:ring-tomato"
                   placeholder="Email address"
                 />
               </div>
@@ -93,7 +98,7 @@ export default function LoginPage() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-tomato focus:outline-none focus:ring-tomato"
+                  className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-500 focus:z-10 focus:border-tomato focus:outline-none focus:ring-tomato"
                   placeholder="Password"
                 />
               </div>

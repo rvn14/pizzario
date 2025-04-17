@@ -73,7 +73,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="justify-center items-center h-screen bg-primary grid grid-cols-1 md:grid-cols-2 gap-4 px-8 md:px-16">
+    <div className="justify-center items-center h-screen bg-primary grid grid-cols-1 md:grid-cols-2 gap-4 px-8 md:px-16 text-white">
       
       <div className='h-screen w-full bg-primary hidden md:block'>
           <Suspense>
