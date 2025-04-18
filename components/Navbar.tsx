@@ -216,7 +216,7 @@ const Navbar = () => {
           <div className="flex gap-4">
             
             <Button asChild className="bg-tomato hover:bg-tomato/80 text-primary font-poppins">
-              <Link href="auth/signup" onClick={handleNavigation}>Signup</Link>
+              <Link href="/signup" onClick={handleNavigation}>Signup</Link>
             </Button>
           </div>
         </div>
