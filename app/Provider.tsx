@@ -1,4 +1,5 @@
 "use client";
+import { ReactLenis } from 'lenis/react'
 import { usePathname } from "next/navigation";
 import Navbar from '@/components/Navbar';
 
@@ -15,9 +16,11 @@ export default function Provider({ children }: { children: React.ReactNode }) {
 
 
   return (
+    <ReactLenis root> 
     <div className="overflow-x-hidden w-full">
       {show && <Navbar />}
       {children}
     </div>
+    </ReactLenis>
   );
 }
