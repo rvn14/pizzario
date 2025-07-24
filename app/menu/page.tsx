@@ -56,7 +56,7 @@ const Menu = () => {
 
   return (
     <div className='antialiased relative w-full min-h-screen flex items-center justify-center bg-primary px-4 sm:px-8 md:px-16 lg:px-28 py-8'>
-      <div className='fixed top-0 left-0 w-full h-full bg-cover bg-center opacity-40 z-0' style={{ backgroundImage: "url('/images/bg.jpg')" }}></div>
+      <div className='absolute inset-0 w-full h-full bg-cover bg-center bg-fixed opacity-40' style={{ backgroundImage: "url('/images/bg.jpg')" }}></div>
       <div className="w-full h-full left-0 flex flex-col items-center justify-center z-10 mt-16">
         <h1 className="text-white font-ragas text-6xl md:text-7xl">Our Menu</h1>
         <p className="text-white/50 font-poppin text-lg mb-8">Explore our delicious pizzas and more!</p>
