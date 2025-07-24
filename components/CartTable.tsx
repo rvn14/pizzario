@@ -46,12 +46,13 @@ export function CartSheet() {
     const totalPrice = items.reduce((total, item) => total + (item.price || 0) * (item.quantity || 1), 0);
 
     //handle checkout
-    const handleCheckout = () => {
+    const handleCheckout = async () => {
         //check if items are present
         if (items.length === 0) {
             toast("Your cart is empty. Please add items to your cart before proceeding to checkout.");
             return;
         }
+
         // Proceed with checkout logic, e.g., redirect to payment page or show confirmation
         router.push('/checkout');
         //close the cart sheet

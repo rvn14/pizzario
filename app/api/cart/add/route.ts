@@ -28,6 +28,31 @@ export async function POST(req: NextRequest) {
             );
             
         }
+        const body = await req.json();
+        const items = body.items || [];
+        if (!Array.isArray(items) || items.length === 0) {
+            return NextResponse.json(
+                { success: false, message: "No items to add to cart" },
+                { status: 400 }
+            );
+        }
+        // Store cart data for the user
+        user.cart = items.map(item => ({
+            id: item.id,
+            name: item.name,
+            size: item.size,
+            quantity: item.quantity,
+            price: item.price,
+            image: item.image
+        }));
+        await user.save();
+
+        return NextResponse.json(
+            { success: true, message: "Cart updated successfully" },
+            { status: 200 }
+        );
+
+    
 
     } catch (error) {
         console.error("Error decoding token:", error);
