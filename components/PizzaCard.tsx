@@ -86,7 +86,7 @@ export const PizzaCard: React.FC<{ pizza: Pizza }> = ({ pizza }) => {
                         width={250}
                         height={250}
                         className={`object-cover h-full w-full transition duration-300 ease-in-out transform hover:scale-105 ${imgLoaded ? "" : "invisible"}`}
-                        onLoad={() => setImgLoaded(false)}
+                        onLoad={() => setImgLoaded(true)}
                     />
                   </div>
                   <div className='flex flex-col justify-center gap-2 px-6 py-1 pb-6 w-full'>
