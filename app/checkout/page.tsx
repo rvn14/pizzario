@@ -6,10 +6,10 @@ const page = () => {
   //check if authenticated
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-950 to-zinc-900 flex flex-col items-center justify-center px-4 py-10">
-      <div className="w-full max-w-3xl">
-        <h1 className="text-3xl font-bold text-tomato mb-8 text-center drop-shadow-lg">
-          Checkout
+    <div className="min-h-screen font-general bg-gradient-to-br from-zinc-950 to-zinc-900 flex flex-col items-center justify-center px-4 py-10">
+      <div className="w-full max-w-5xl">
+        <h1 className="text-5xl font-clash-semibold text-white/80 mb-8 text-center drop-shadow-lg">
+          Order Checkout
         </h1>
         <div className="shadow-2xl rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-md p-6">
           <CheckoutTable />

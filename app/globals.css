@@ -189,7 +189,7 @@ body:not(.page-transition) {
 }
 @utility hero-bg-secondary{
   background-image: url("/images/bg.jpg");
-  @apply bg-cover bg-center bg-no-repeat bg-fixed;
+  @apply bg-cover bg-center bg-no-repeat ;
 }
 
 @utility floating-nav-black {

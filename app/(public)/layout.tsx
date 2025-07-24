@@ -4,6 +4,7 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
     
     <main className="antialiased flex flex-col items-center ">
         {children}
+        
     </main>
     
   );
