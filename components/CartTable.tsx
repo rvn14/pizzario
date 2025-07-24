@@ -71,14 +71,14 @@ export function CartSheet() {
           </div>
         </Button>
       </SheetTrigger>
-      <SheetContent className="min-w-[350px] max-w-[400px] p-0 flex flex-col bg-[#18181b] shadow-2xl border border-zinc-800 rounded-2xl z-90">
+      <SheetContent className=" min-w-[350px] max-w-[400px] p-0 flex flex-col bg-[#18181b] shadow-2xl border border-zinc-800 rounded-2xl">
         <SheetHeader className="bg-tomato text-primary px-6 py-4">
           <SheetTitle className="text-2xl font-bold tracking-wide ">Ordered Items</SheetTitle>
           <SheetDescription className="text-zinc-800">Review your selected items and proceed to checkout.</SheetDescription>
         </SheetHeader>
         <div className="flex-1 px-4 py-4 overflow-y-auto">
           <ScrollArea className="h-full w-full rounded-md ">
-          
+
           <div className="divide-y divide-zinc-500">
             {items.length === 0 ? (
               <div className="py-8 text-center text-zinc-500">Your cart is empty.</div>
