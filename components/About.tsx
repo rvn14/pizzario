@@ -5,18 +5,15 @@ const About = () => {
 
 
   return (
-    <div className='relative w-full min-h-screen bg-primary flex items-center justify-center px-4 sm:px-8 md:px-16 lg:px-28 py-8'>
-      <div className="flex flex-col items-center justify-center gap-4 text-white text-lg font-poppin">
-        <h1 className="text-4xl font-bold">About Us</h1>
-        <p className="text-center max-w-2xl">
-          Welcome to our pizza place! We are passionate about serving the best pizza in town. Our dough is made fresh daily, and we use only the finest ingredients to create delicious pizzas that will satisfy your cravings. Whether you prefer classic cheese, pepperoni, or gourmet toppings, we have something for everyone. Join us for a slice or order online for delivery. Thank you for choosing us as your go-to pizza destination! We look forward to serving you soon!    
-        </p>
-      </div>
-      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-primary to-transparent"></div>
-      <div className="absolute top-0 right-0 w-full h-1/2 bg-gradient-to-b from-primary to-transparent"></div>
-      <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-30" style={{ backgroundImage: "url('/images/bg.jpg')" }}></div>
-      
-    </div>
+    <section className='w-full min-h-screen py-16 flex items-center justify-center relative'>
+        <div className='absolute inset-0 bg-gradient-to-br from-black/50 via-primary/30 to-black/70 hero-bg-secondary'></div>
+        <div className='relative z-10 text-center px-4 sm:px-6 md:px-8 max-w-6xl mx-auto'>
+            <h1 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6'>About Us</h1>
+            <p className='text-white/80 font-poppins text-lg md:text-xl leading-relaxed max-w-3xl mx-auto'>
+                Welcome to Pizzar.io, where we bring you the finest pizzas crafted with passion and the freshest ingredients. Our mission is to deliver an unforgettable pizza experience that keeps you coming back for more.
+            </p>
+        </div>
+    </section>
   )
 }
 

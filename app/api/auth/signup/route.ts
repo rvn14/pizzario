@@ -1,53 +1,96 @@
-import { NextResponse } from "next/server";
-import bcrypt from "bcrypt";
-import { connectToDB } from "@/lib/mongodb";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { connectToDb } from "@/lib/mongodb";
+import User from "@/models/User";
+import mongoose from "mongoose";
+import { NextRequest, NextResponse } from "next/server";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import type { SignOptions } from "jsonwebtoken";
 
-export async function POST(request: Request) {
+const JWT_SECRET = process.env.JWT_SECRET!;
+const JWT_EXPIRATION = process.env.JWT_EXPIRATION || "7d";
+
+export async function POST(req: NextRequest) {
+  //connec to the database
+  await connectToDb();
+
+   // Start a MongoDB session for transaction
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
   try {
-    const body = await request.json();
-    const { name, email, password } = body;
 
-    // Simple validation
-    if (!name || !email || !password) {
-      return NextResponse.json(
-        { message: "Missing required fields" },
-        { status: 400 }
-      );
-    }
+    // Parse JSON body
+    const {name, email, password} = await req.json();
 
-    // Connect to the database
-    const { db } = await connectToDB();
+    // 1. Check if user already exists
+    const existingUser = await User.findOne({ email }).session(session);
 
-    // Check if user already exists
-    const existingUser = await db.collection("users").findOne({ email, name });
     if (existingUser) {
+      await session.abortTransaction();
+      session.endSession();
       return NextResponse.json(
-        { message: "Email already exists" },
+        { success: false, message: "User already exists." },
         { status: 409 }
       );
     }
+    
+    // 2. Hash the password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // 3. Create the user inside the transaction
+    const createdUsers = await User.create(
+      [{ name, email, password: hashedPassword }],
+      { session }
+    );
+    const newUser = createdUsers[0];
 
-    // Insert the new user
-    const result = await db.collection("users").insertOne({
-        name,
-        email,
-        password: hashedPassword,
-        cart: [],
-        createdAt: new Date(),
-    });
+    // 4. Generate JWT token
+    const token = jwt.sign(
+      { userId: newUser._id },
+      JWT_SECRET,
+      { expiresIn: JWT_EXPIRATION } as SignOptions
+    );
 
-    return NextResponse.json(
-      { message: "User created successfully", userId: result.insertedId },
+    // 5. Commit the transaction
+    await session.commitTransaction();
+    session.endSession();
+
+    // 6. Return user data (without password) + token
+    const userSafe = {
+      _id: newUser._id,
+      name: newUser.name,
+      email: newUser.email,
+      createdAt: newUser.createdAt,
+      updatedAt: newUser.updatedAt,
+    };
+    const response = NextResponse.json(
+      {
+        success: true,
+        message: "User created successfully",
+        data: { user: userSafe },
+      },
       { status: 201 }
     );
-  } catch (error) {
+    response.headers.set(
+      'Set-Cookie',
+      `token=${token}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=604800`
+    );
+    return response;
+
+  } catch (error: any) {
     console.error("Error during signup:", error);
+    await session.abortTransaction();
+    session.endSession();
+
     return NextResponse.json(
-      { message: "An error occurred during signup" },
-      { status: 500 }
+      {
+        success: false,
+        message: error.message || "An error occurred during signup.",
+      },
+      { status: error.statusCode || 500 }
     );
   }
+
 }

@@ -1,36 +1,46 @@
-// app/api/auth/me/route.ts
-import { NextRequest, NextResponse } from 'next/server';
-import jwt from 'jsonwebtoken';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import jwt from "jsonwebtoken";
+import User from "@/models/User";
+import { connectToDb } from "@/lib/mongodb";
 
-// Define your expected payload shape
-interface JwtPayload {
-  userId: string;
-  email: string;
-  name: string;
-  isAdmin: boolean;
-}
+const JWT_SECRET = process.env.JWT_SECRET!;
 
-export async function GET(request: NextRequest) {
-  const token = request.cookies.get('token')?.value;
+export async function GET(req: NextRequest) {
+  await connectToDb();
+
+  // Use Next.js cookies helper
+  const cookieStore = cookies();
+  const token = (await cookieStore).get("token")?.value;
+
   if (!token) {
-    return NextResponse.json({ authenticated: false });
+    return NextResponse.json(
+      { success: false, message: "No token provided" },
+      { status: 401 }
+    );
   }
 
   try {
-    // Verify & decode! Throws if invalid/expired
-    const payload = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
+    const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
 
-    return NextResponse.json({
-      authenticated: true,
-      user: {
-        id: payload.userId,
-        email: payload.email,
-        name: payload.name,
-        isAdmin: payload.isAdmin,
-      },
-    });
-  } catch (err) {
-    console.error('JWT verify failed:', err);
-    return NextResponse.json({ authenticated: false });
+    const user = await User.findById(decoded.userId).select("-password");
+    if (!user) {
+      return NextResponse.json(
+        { success: false, message: "User not found" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(
+      { success: true, user },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error verifying token:", error);
+    return NextResponse.json(
+      { success: false, message: "Invalid token" },
+      { status: 401 }
+    );
   }
 }
