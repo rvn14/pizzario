@@ -4,7 +4,7 @@ import { Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Scene from "@/components/Scene";
-import Link from "next/link";
+import { TransitionLink } from "@/components/utils/TransitionLink";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -137,9 +137,9 @@ export default function LoginPage() {
             <div className="text-center text-sm text-amber-50">
               <p>
                 Don&apos;t have an account?{" "}
-                <Link href="/signup" >
+                <TransitionLink href="/signup" >
                 <span className="font-medium text-tomato/80 hover:text-tomato">Register here</span>
-                </Link>
+                </TransitionLink>
               </p>
             </div>
           </form>
