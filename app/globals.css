@@ -25,9 +25,15 @@ body {
 
 .page-transition {
   opacity: 0;
-  background: #050505;
-  transform: translateY(-40px);
-  filter: blur(12px);
+  transform: translateY(10px);
+  filter: blur(5px);
+  background-color: #050505;
+  transition: opacity 0.5s ease;
+}
+
+body:not(.page-transition) {
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
 
 @theme inline {
@@ -38,7 +44,15 @@ body {
   --font-poppins: 'Poppins', sans-serif;
   --font-general: 'General Sans', sans-serif;
   --font-inter: 'Inter', sans-serif;
+  --font-clash-extralight: 'ClashDisplay-Extralight', sans-serif;
+  --font-clash-light: 'ClashDisplay-Light', sans-serif;
+  --font-clash: 'ClashDisplay-Regular', sans-serif;       
+  --font-clash-medium: 'ClashDisplay-Medium', sans-serif;
+  --font-clash-semibold: 'ClashDisplay-Semibold', sans-serif;
+  --font-clash-bold: 'ClashDisplay-Bold', sans-serif;
+  --font-clash-variable: 'ClashDisplay-Variable', sans-serif;
 
+  --color-charcoal: #050505;
   --color-violet-300: #5724ff;
 
   --color-yellow-100: #8e983f;
@@ -170,7 +184,12 @@ body {
 }
 
 @utility hero-bg{
-  background-image: url("/images/hero-bg.webp")
+  background-image: url("/images/bg.png");
+  @apply bg-cover bg-center bg-no-repeat;
+}
+@utility hero-bg-secondary{
+  background-image: url("/images/bg.jpg");
+  @apply bg-cover bg-center bg-no-repeat bg-fixed;
 }
 
 @utility floating-nav-black {
@@ -180,3 +199,108 @@ body {
 @utility nav-hover-btn {
   @apply relative ms-4 font-poppins text-xs uppercase text-blue-50 after:absolute after:-bottom-0.5 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-blue-50 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100 dark:after:bg-white cursor-pointer;
 }
+
+
+
+
+/**
+* @license
+*
+* Font Family: Clash Display
+* Designed by: Indian Type Foundry
+* URL: https://www.fontshare.com/fonts/clash-display
+* © 2025 Indian Type Foundry
+*
+* Clash Display Extralight 
+* Clash Display Light 
+* Clash Display Regular 
+* Clash Display Medium 
+* Clash Display Semibold 
+* Clash Display Bold 
+* Clash Display Variable (Variable font)
+
+*
+*/
+@font-face {
+  font-family: 'ClashDisplay-Extralight';
+  src: url('/fonts/ClashDisplay-Extralight.woff2') format('woff2'),
+       url('/fonts/ClashDisplay-Extralight.woff') format('woff'),
+       url('/fonts/ClashDisplay-Extralight.ttf') format('truetype');
+  font-weight: 200;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ClashDisplay-Light';
+  src: url('/fonts/ClashDisplay-Light.woff2') format('woff2'),
+       url('/fonts/ClashDisplay-Light.woff') format('woff'),
+       url('/fonts/ClashDisplay-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ClashDisplay-Regular';
+  src: url('/fonts/ClashDisplay-Regular.woff2') format('woff2'),
+       url('/fonts/ClashDisplay-Regular.woff') format('woff'),
+       url('/fonts/ClashDisplay-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ClashDisplay-Medium';
+  src: url('/fonts/ClashDisplay-Medium.woff2') format('woff2'),
+       url('/fonts/ClashDisplay-Medium.woff') format('woff'),
+       url('/fonts/ClashDisplay-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ClashDisplay-Semibold';
+  src: url('/fonts/ClashDisplay-Semibold.woff2') format('woff2'),
+       url('/fonts/ClashDisplay-Semibold.woff') format('woff'),
+       url('/fonts/ClashDisplay-Semibold.ttf') format('truetype');
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ClashDisplay-Bold';
+  src: url('/fonts/ClashDisplay-Bold.woff2') format('woff2'),
+       url('/fonts/ClashDisplay-Bold.woff') format('woff'),
+       url('/fonts/ClashDisplay-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+/**
+* This is a variable font
+* You can control variable axes as shown below:
+* font-variation-settings: wght 700.0;
+*
+* available axes:
+'wght' (range from 200.0 to 700.0
+*/
+@font-face {
+  font-family: 'ClashDisplay-Variable';
+  src: url('/fonts/ClashDisplay-Variable.woff2') format('woff2'),
+       url('/fonts/ClashDisplay-Variable.woff') format('woff'),
+       url('/fonts/ClashDisplay-Variable.ttf') format('truetype');
+  font-weight: 200 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+/* Tailwind font utilities for Clash Display */
+@layer utilities {
+  .font-clash-extralight { font-family: 'ClashDisplay-Extralight', sans-serif; }
+  .font-clash-light { font-family: 'ClashDisplay-Light', sans-serif; }
+  .font-clash-regular { font-family: 'ClashDisplay-Regular', sans-serif; }
+  .font-clash-medium { font-family: 'ClashDisplay-Medium', sans-serif; }
+  .font-clash-semibold { font-family: 'ClashDisplay-Semibold', sans-serif; }
+  .font-clash-bold { font-family: 'ClashDisplay-Bold', sans-serif; }
+  .font-clash-variable { font-family: 'ClashDisplay-Variable', sans-serif; }
+}
+

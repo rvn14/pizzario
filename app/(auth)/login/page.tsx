@@ -4,7 +4,7 @@ import { Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Scene from "@/components/Scene";
-import { TransitionLink } from "@/components/utils/TransitionLink";
+import Link from "next/link";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -42,7 +42,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="justify-center items-center h-screen bg-primary grid grid-cols-1 md:grid-cols-2 gap-4 px-8 md:px-16">
+    <div className="justify-center items-center h-screen bg-primary grid grid-cols-1 md:grid-cols-2 gap-4 px-6 md:px-16">
       <div className="h-screen order-2 hidden md:block">
         <Suspense>
           <Scene rotateX={3} />
@@ -137,9 +137,9 @@ export default function LoginPage() {
             <div className="text-center text-sm text-amber-50">
               <p>
                 Don&apos;t have an account?{" "}
-                <TransitionLink href="/signup" >
+                <Link href="/signup" >
                 <span className="font-medium text-tomato/80 hover:text-tomato">Register here</span>
-                </TransitionLink>
+                </Link>
               </p>
             </div>
           </form>

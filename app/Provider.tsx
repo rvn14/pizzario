@@ -1,26 +1,16 @@
+
 "use client";
-import { ReactLenis } from 'lenis/react'
-import { usePathname } from "next/navigation";
+import { ReactLenis } from 'lenis/react';
 import Navbar from '@/components/Navbar';
 
-
 export default function Provider({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-
-
-  const hideNavFootPaths = ["/login", "/signup"]; 
-  
-  // Compute whether to show the common components.
-  const show = !hideNavFootPaths.includes(pathname);
-  // Decide if the Footer should be rendered.
-
-
+  // If you need to conditionally show Navbar, restore pathname logic here
   return (
-    <ReactLenis root> 
-    <div className="overflow-x-hidden w-full">
-      {show && <Navbar />}
-      {children}
-    </div>
+    <ReactLenis root>
+      <div className="overflow-x-hidden w-full">
+        <Navbar />
+        {children}
+      </div>
     </ReactLenis>
   );
 }

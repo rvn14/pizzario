@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { signupSchema, type SignupFormData } from '@/lib//rules';
 import Scene from '@/components/Scene';
-import { TransitionLink } from '@/components/utils/TransitionLink';
+import Link from 'next/link';
+import { toast } from "sonner"
 
 const SignupPage = () => {
   const router = useRouter();
@@ -88,9 +89,16 @@ const SignupPage = () => {
           </div>
           
           {serverError && (
-            <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-              {serverError}
-            </div>
+            // Replace the old error div with shadcn/ui Sonnet
+            toast(serverError, {
+              description: "Please try again.",
+              duration: 5000,
+              style: {
+                backgroundColor: 'var(--popover)',
+                color: 'var(--popover-foreground)',
+                borderColor: 'var(--border)',
+              },
+            })
           )}
           
           <form className="mt-8 space-y-6" onSubmit={handleSubmit} noValidate>
@@ -180,11 +188,11 @@ const SignupPage = () => {
           <div className="text-center mt-4">
             <p className="text-sm text-gray-200">
               Already have an account?{' '}
-              <TransitionLink href="/login" >
+              <Link href="/login" >
               <span className="font-medium text-tomato hover:text-tomato/80">
                 Log in
               </span>
-              </TransitionLink>
+              </Link>
             </p>
           </div>
         </div>

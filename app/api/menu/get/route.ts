@@ -1,8 +1,8 @@
-import { connectToDB } from "@/lib/mongodb";
+import { connectToDb } from "@/lib/mongodb";
 
 export async function GET() {
-    
-    const { db } = await connectToDB();
+    const mongoose = await connectToDb();
+    const db = mongoose.connection.db;
 
     const pizzas = await db.collection("pizzas").find({}).toArray();
     const desserts = await db.collection("desserts").find({}).toArray();
@@ -17,7 +17,4 @@ export async function GET() {
             "Content-Type": "application/json",
         },
     });
-    
-
-
 }

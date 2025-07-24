@@ -5,9 +5,12 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request){
 
-    const cookieStore = await cookies();
-    cookieStore.delete('token');
-    
-    return NextResponse.json({ message: "Logged out successfully" }, { status: 200 });
+    // Remove the token cookie by setting it to expire in the past
+    const response = NextResponse.json({ message: "Logged out successfully" }, { status: 200 });
+    response.headers.set(
+      'Set-Cookie',
+      'token=; Path=/; HttpOnly; Secure; SameSite=Strict; Expires=Thu, 01 Jan 1970 00:00:00 GMT'
+    );
+    return response;
 
 }

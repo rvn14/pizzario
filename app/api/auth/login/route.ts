@@ -1,88 +1,69 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { NextResponse } from "next/server";
-import bcrypt from "bcrypt";
-import { connectToDB } from "@/lib/mongodb";
-import { cookies } from "next/headers";
-import jwt from "jsonwebtoken";
+import { NextRequest, NextResponse } from "next/server";
+import bcrypt from "bcryptjs";
+import jwt, { SignOptions } from "jsonwebtoken";
+import { connectToDb } from "@/lib/mongodb";
+import User from "@/models/User";
+
 
 const JWT_SECRET = process.env.JWT_SECRET!;
+const JWT_EXPIRATION = process.env.JWT_EXPIRATION || "1d";
 
-export async function POST(request: Request) {
+export async function POST(req: NextRequest){
+
+  await connectToDb();
+
   try {
-    const body = await request.json();
-    const { email, password } = body;
+    // Parse JSON body
+  const { email, password } = await req.json();
 
-    // Simple validation
-    if (!email || !password) {
-      return NextResponse.json(
-        { message: "Email and password are required" },
-        { status: 400 }
-      );
-    }
-
-    // Connect to the database
-    const { db } = await connectToDB();
-
-    // Find user by email
-    const user = await db.collection("users").findOne({ email });
-
-    if (!user) {
-      return NextResponse.json(
-        { message: "Invalid credentials" },
-        { status: 401 }
-      );
-    }
-
-    // Compare passwords
-    const passwordMatch = await bcrypt.compare(password, user.password);
-
-    if (!passwordMatch) {
-      return NextResponse.json(
-        { message: "Invalid credentials" },
-        { status: 401 }
-      );
-    }
-
-
-    // Ensure we have the required fields
-    const userData = {
-      userId: user._id,
-      name: user.name || '', // Fallback if name is missing
-      email: user.email || '', // Fallback if email is missing
-      isAdmin: user.isAdmin || false
-    };
-
-    const token = jwt.sign(
-      userData,
-      JWT_SECRET,
-      { expiresIn: "2h" }
-    );
-
-    const cookieStore = await cookies();
-    cookieStore.set({
-      name: 'token',
-      value: token,
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      path: '/',
-      maxAge: 86400, // 1 day
-    });
-
-    // Remove password from user object before sending response
-    const { password: _, ...userWithoutPassword } = user;
-
+  // 1. Check if user exists
+  const user = await User.findOne({ email });
+  if (!user) {
     return NextResponse.json(
-      { 
-        message: "Login successful", 
-        user: userWithoutPassword 
-      },
-      { status: 200 }
-    );
-  } catch (error) {
-    console.error("Error during login:", error);
-    return NextResponse.json(
-      { message: "An error occurred during login" },
-      { status: 500 }
+      { success: false, message: "Invalid credentials." },
+      { status: 401 }
     );
   }
+
+  // 2. Check password
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+  if (!isPasswordValid) {
+    return NextResponse.json(
+      { success: false, message: "Invalid credentials." },
+      { status: 401 }
+    );
+  }
+
+  // 3. Generate JWT token
+  const token = jwt.sign(
+    { userId: user._id },
+    JWT_SECRET as string,
+    { expiresIn: JWT_EXPIRATION } as SignOptions
+  );
+
+  // 4. Return user data (without password) + token
+  const userSafe = {
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+  };
+  const response = NextResponse.json(
+    { success: true, user: userSafe },
+    { status: 200 }
+  );
+  response.headers.set(
+    'Set-Cookie',
+    `token=${token}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=86400`
+  );
+  return response;
+  } catch (error) {
+    console.error("Error connecting to the database:", error);
+    return NextResponse.json(
+      { success: false, message: "Database connection failed." },
+      { status: 500 }
+    );
+    
+  }
+
+
 }

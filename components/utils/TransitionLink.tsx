@@ -8,7 +8,7 @@ interface TransitionLinkProps extends LinkProps {
   href: string;
 }
 
-function sleep(ms: number): Promise<void> {
+async function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
