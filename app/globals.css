@@ -184,7 +184,7 @@ body:not(.page-transition) {
 }
 
 @utility hero-bg{
-  background-image: url("/images/bg.png");
+  background-image: url("/images/bg1.jpg");
   @apply bg-cover bg-center bg-no-repeat;
 }
 @utility hero-bg-secondary{

@@ -98,7 +98,7 @@ const Home = () => {
           transition={{ duration: 0.8 }}
         >
           <Image
-            src="/images/bg2.png"
+            src="/images/bg2.jpg"
             alt="Signature dish"
             width={400}
             height={460}
@@ -137,7 +137,7 @@ const Home = () => {
           transition={{ duration: 0.8, delay: 0.1 }}
         >
           <Image
-            src="/images/pic1.png"
+            src="/images/pic1.jpg"
             alt="Cooking at our kitchen"
             width={400}
             height={460}
