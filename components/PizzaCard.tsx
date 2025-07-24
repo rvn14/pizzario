@@ -129,7 +129,7 @@ export const PizzaCard: React.FC<{ pizza: Pizza }> = ({ pizza }) => {
                     </div>
                         
                       
-                    <Button onClick={handleOrder} className='bg-tomato hover:bg-tomato/80 w-full rounded-md text-md outline-0 mt-2 cursor-pointer transition duration-100 ease-in'>Order Now</Button>
+                    <Button onClick={handleOrder} className='bg-tomato hover:bg-tomato/80 w-full rounded-md text-md outline-0 mt-2 cursor-pointer transition duration-100 ease-in'>{"Order Now"}</Button>
                   </div>
               </div>
     </div>
