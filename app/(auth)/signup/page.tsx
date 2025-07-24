@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { signupSchema, type SignupFormData } from '@/lib//rules';
 import Scene from '@/components/Scene';
-import Link from 'next/link';
 import { toast } from "sonner"
+import { TransitionLink } from '@/components/utils/TransitionLink';
 
 const SignupPage = () => {
   const router = useRouter();
@@ -188,11 +188,11 @@ const SignupPage = () => {
           <div className="text-center mt-4">
             <p className="text-sm text-gray-200">
               Already have an account?{' '}
-              <Link href="/login" >
+              <TransitionLink href="/login" >
               <span className="font-medium text-tomato hover:text-tomato/80">
                 Log in
               </span>
-              </Link>
+              </TransitionLink>
             </p>
           </div>
         </div>
