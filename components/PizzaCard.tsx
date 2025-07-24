@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/select";
 import { useCartStore } from "@/lib/cartStore";
 import { Minus, Plus } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Pizza {
   _id: string;
@@ -25,6 +26,7 @@ export const PizzaCard: React.FC<{ pizza: Pizza }> = ({ pizza }) => {
     
     const [selected, setSelected] = useState("regular");
     const[quantity, setQuantity] = useState(1);
+    const [imgLoaded, setImgLoaded] = useState(false);
     const cartStore = useCartStore();
    
     const add = () => {
@@ -74,8 +76,18 @@ export const PizzaCard: React.FC<{ pizza: Pizza }> = ({ pizza }) => {
   return (
     <div className='item-card'>
         <div className='grid w-[160px] sm:w-[220px] md:w-[250px] justify-items-center rounded-2xl overflow-hidden bg-[#131313]'>
-                  <div className='overflow-hidden'>
-                    <Image src={pizza && pizza.image} alt="Pizza" width={250} height={250} className='object-cover h-full w-full transition duration-300 ease-in-out transform hover:scale-105' />
+                  <div className='overflow-hidden relative'>
+                    {!imgLoaded && (
+                        <Skeleton className="w-[250px] h-[250px] absolute top-0 left-0 z-10" />
+                    )}
+                    <Image
+                        src={pizza && pizza.image}
+                        alt="Pizza"
+                        width={250}
+                        height={250}
+                        className={`object-cover h-full w-full transition duration-300 ease-in-out transform hover:scale-105 ${imgLoaded ? "" : "invisible"}`}
+                        onLoad={() => setImgLoaded(false)}
+                    />
                   </div>
                   <div className='flex flex-col justify-center gap-2 px-6 py-1 pb-6 w-full'>
                     <h1 className='text-gray-50 text-lg line-clamp-1 font-semibold font-inter'>{pizza && pizza.name}</h1>
