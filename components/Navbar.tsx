@@ -8,6 +8,7 @@ import { Menu, ShoppingCartIcon, X } from "lucide-react";
 import { Button } from "./ui/button";
 import axios from "axios";
 import { CartSheet } from "./CartTable";
+import { TransitionLink } from "./utils/TransitionLink";
 
 const Navbar = () => {
   // Refs for navigation container
@@ -122,12 +123,12 @@ const Navbar = () => {
         <header className="absolute top-1/2 w-full -translate-y-1/2">
           <nav className="flex size-full items-center justify-between p-4">
             {/* Logo and Product button */}
-            <Link href={"/"}>
+            <TransitionLink href={"/"}>
             <div className="flex flex-col items-center ml-5">
               <div className="font-ragas text-blue-50 font-black text-2xl pointer-events-none select-none">PIZZAR.3IO</div>
               <div className="font-chunk text-blue-50 text-xs pointer-events-none select-none -mt-2">EST. 1995</div>
             </div>
-            </Link>
+            </TransitionLink>
 
             {/* Hamburger menu button - visible on mobile */}
             <div className="md:hidden flex items-center gap-4">
@@ -151,13 +152,13 @@ const Navbar = () => {
             {/* Navigation Links - visible on desktop */}
             <div className="hidden md:flex h-full items-center justify-between mr-5 space-x-5">
               <div className="text-white font-poppin text-md nav-hover-btn">
-                <Link href="/">Home</Link>
+                <TransitionLink href="/">Home</TransitionLink>
               </div>
               <div className="text-white font-poppin text-md nav-hover-btn">
-                <Link href="/menu">Menu</Link>
+                <TransitionLink href="/menu">Menu</TransitionLink>
               </div>
               <div className="text-white font-poppin text-md nav-hover-btn">
-                <Link href="/contact">Contact</Link>
+                <TransitionLink href="/contact">Contact</TransitionLink>
               </div>
               
               <CartSheet />
