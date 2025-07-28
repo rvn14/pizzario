@@ -46,6 +46,7 @@ const CheckoutTable = () => {
                                     alt={item.name || "Pizza"}
                                     width={64}
                                     height={64}
+                                    placeholder='blur'
                                     className="rounded-lg object-cover shadow-lg"
                                 />
                             </TableCell>
