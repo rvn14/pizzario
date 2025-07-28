@@ -55,36 +55,40 @@ const Menu = () => {
       
 
   return (
-    <div className='antialiased relative w-full min-h-screen flex items-center justify-center bg-primary px-4 sm:px-8 md:px-16 lg:px-28 py-8'>
-      <div className='absolute inset-0 w-full h-full bg-cover bg-center bg-fixed opacity-40' style={{ backgroundImage: "url('/images/bg.jpg')" }}></div>
-      <div className="w-full h-full left-0 flex flex-col items-center justify-center z-10 mt-16">
-        <h1 className="text-white font-ragas text-6xl md:text-7xl">Our Menu</h1>
-        <p className="text-white/50 font-poppin text-lg mb-8">Explore our delicious pizzas and more!</p>
-
+    <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-zinc-950 to-zinc-900 px-4 py-12">
+      <div className="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed opacity-30" style={{ backgroundImage: "url('/images/bg.jpg')" }}></div>
+      <div className="relative w-full max-w-6xl z-10 flex flex-col items-center justify-center">
+        <h1 className="text-white font-clash-semibold text-5xl md:text-6xl mb-2 drop-shadow-lg tracking-tight">Our Menu</h1>
+        <p className="text-zinc-400 font-poppins text-lg mb-10 text-center">Explore our delicious pizzas and more!</p>
         {loading ? (
           <div className="flex flex-col items-center justify-center mt-20">
-            <div className="animate-spin rounded-full border-8 border-t-tomato border-b-gray-300 border-l-gray-300 border-r-tomato h-24 w-24 mb-6 shadow-lg bg-white/10 flex items-center justify-center">
-              <span className="text-tomato text-5xl">
+            <div className="animate-spin rounded-full border-8 border-t-tomato border-b-zinc-800 border-l-zinc-800 border-r-tomato h-20 w-20 mb-6 shadow-lg bg-white/10 flex items-center justify-center">
+              <span className="text-tomato text-4xl">
                 <Pizza />
               </span>
             </div>
-            
           </div>
         ) : (
-          <>
-            <div>
-              <h1 className="text-white/80 font-poppins text-2xl mb-4 flex items-center gap-2"><span className="text-tomato"><Pizza/></span> Pizza Collection</h1>
+          <div className="w-full flex flex-col gap-12">
+            <div className="bg-zinc-900/80 border border-zinc-800 rounded-xl shadow-lg p-8">
+              <h2 className="text-white/90 font-clash-semibold text-2xl mb-4 flex items-center gap-2">
+                <span className="text-tomato"><Pizza/></span> Pizza Collection
+              </h2>
               {data && <PizzaList pizzas={data.pizzas} />}
             </div>
-            <div className="mt-12">
-              <h1 className="text-white/80 font-poppins text-2xl mb-4 flex items-center gap-2"><span className="text-tomato"><Dessert/></span> Dessert Collection</h1>
+            <div className="bg-zinc-900/80 border border-zinc-800 rounded-xl shadow-lg p-8">
+              <h2 className="text-white/90 font-clash-semibold text-2xl mb-4 flex items-center gap-2">
+                <span className="text-tomato"><Dessert/></span> Dessert Collection
+              </h2>
               {data && <ItemList items={data.desserts} />}
             </div>
-            <div className="mt-12">
-              <h1 className="text-white/80 font-poppins text-2xl mb-4 flex items-center gap-2"><span className="text-tomato"><CupSodaIcon/></span> Beverages Collection</h1>
+            <div className="bg-zinc-900/80 border border-zinc-800 rounded-xl shadow-lg p-8">
+              <h2 className="text-white/90 font-clash-semibold text-2xl mb-4 flex items-center gap-2">
+                <span className="text-tomato"><CupSodaIcon/></span> Beverages Collection
+              </h2>
               {data && <ItemList items={data.beverages} />}
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>

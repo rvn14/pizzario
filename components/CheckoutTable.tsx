@@ -39,7 +39,7 @@ const CheckoutTable = () => {
                     </TableRow>
                 ) : (
                     items.map((item, idx) => (
-                        <TableRow key={item.id || idx} className="hover:bg-zinc-800/60 transition-colors">
+                        <TableRow key={idx} className="hover:bg-zinc-800/60 transition-colors">
                             <TableCell>
                                 <Image
                                     src={item.image || "/images/pizzas/margherita.jpg"}
@@ -61,9 +61,9 @@ const CheckoutTable = () => {
                 )}
             </TableBody>
             <TableFooter>
-                <TableRow className="bg-zinc-900/80 hover:bg-zinc-900/80">
-                    <TableCell colSpan={5} className="text-right font-semibold text-xl text-zinc-200 py-4">Total</TableCell>
-                    <TableCell className="font-bold text-tomato text-2xl py-4">${totalPrice.toFixed(2)}</TableCell>
+                <TableRow className="bg-zinc-800 border-t border-zinc-800 pt-6 mt-6 hover:bg-zinc-800">
+                    <TableCell colSpan={5} className="text-lg text-zinc-400 font-medium">Subtotal</TableCell>
+                    <TableCell className="text-xl text-tomato font-bold">${totalPrice.toFixed(2)}</TableCell>
                 </TableRow>
             </TableFooter>
         </Table>

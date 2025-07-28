@@ -73,7 +73,7 @@ export function CartSheet() {
       </SheetTrigger>
       <SheetContent className="min-w-[350px] max-w-[400px] p-0 flex flex-col bg-[#18181b] shadow-2xl border border-zinc-800 rounded-2xl z-90">
         <SheetHeader className="bg-tomato text-primary px-6 py-4">
-          <SheetTitle className="text-2xl font-bold tracking-wide ">Ordered Items</SheetTitle>
+          <SheetTitle className="text-2xl font-clash-bold tracking-wide ">Ordered Items</SheetTitle>
           <SheetDescription className="text-zinc-800">Review your selected items and proceed to checkout.</SheetDescription>
         </SheetHeader>
         <div className="flex-1 px-4 py-4 overflow-y-auto">
@@ -84,7 +84,7 @@ export function CartSheet() {
               <div className="py-8 text-center text-zinc-500">Your cart is empty.</div>
             ) : (
               items.map((item, idx) => (
-                <div key={item.id || idx} className="flex items-center p-3 bg-zinc-800">
+                <div key={ idx} className="flex items-center p-3 bg-zinc-800">
                   <Image src={item.image || "/images/pizzas/margherita.jpg"} alt={item.name || "Pizza"} width={48} height={48} className="rounded-lg object-cover mr-4" />
                   <div className="flex-1">
                     <div className="font-semibold text-lg text-white">{item.name} {item.size && <span className="text-sm text-zinc-400">({item.size})</span> }</div>
