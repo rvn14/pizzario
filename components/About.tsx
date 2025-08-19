@@ -1,18 +1,16 @@
+import React from 'react'
+
 const About = () => {
-  
-    
-
-
-
   return (
-    <section className='w-full min-h-screen py-16 flex items-center justify-center relative'>
-        <div className='absolute inset-0 bg-gradient-to-br from-black/50 via-primary/30 to-black/70 hero-bg-secondary'></div>
-        <div className='relative z-10 text-center px-4 sm:px-6 md:px-8 max-w-6xl mx-auto'>
-            <h1 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6'>About Us</h1>
-            <p className='text-white/80 font-poppins text-lg md:text-xl leading-relaxed max-w-3xl mx-auto'>
-                Welcome to Pizzar.io, where we bring you the finest pizzas crafted with passion and the freshest ingredients. Our mission is to deliver an unforgettable pizza experience that keeps you coming back for more.
-            </p>
-        </div>
+    <section className='w-full min-h-screen flex px-30 relative items-center '>
+      <div className="w-full mx-auto  text-crown-600 select-none">
+        <h2 className="text-4xl md:text-6xl font-bold font-abriel ">More Than a Meal, It’s an</h2>
+
+        <h1 className="text-5xl md:text-8xl -rotate-3 font-oi  [text-shadow:0_10px_0_theme(colors.crown.950)]">
+          EXPERIENCE
+        </h1>
+        <p className='mt-16 max-w-3xl font-abriel text-3xl text-crown-900 font-bold'>At Pizzario, we’re more than just a restaurant - we’re a place where flavors, laughter, and memories come together. Born from a love of authentic recipes and crafted with passion, our mission is simple, to serve food that feels like home, yet tastes unforgettable.</p>
+      </div>
     </section>
   )
 }

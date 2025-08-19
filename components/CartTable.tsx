@@ -64,9 +64,9 @@ export function CartSheet() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button asChild variant="outline" className="relative text-tomato bg-transparent border-2 border-tomato rounded-xl hover:bg-tomato hover:text-primary cursor-pointer">
+        <Button asChild variant="ghost" className="fixed bottom-0 bg-bunting-950 text-bunting-100 hover:text-bunting-100 w-6 h-6 !p-6 hover:bg-bunting-950/90 border-0 rounded-full cursor-pointer">
           <div className="relative">
-            <ShoppingCartIcon />
+            <ShoppingCartIcon className="w-6 h-6" />
             {items.length > 0 && <div className="red-dot z-20 absolute top-0 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>}
           </div>
         </Button>

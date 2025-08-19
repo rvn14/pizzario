@@ -46,7 +46,6 @@ const CheckoutTable = () => {
                                     alt={item.name || "Pizza"}
                                     width={64}
                                     height={64}
-                                    placeholder='blur'
                                     className="rounded-lg object-cover shadow-lg"
                                 />
                             </TableCell>
@@ -62,7 +61,7 @@ const CheckoutTable = () => {
                 )}
             </TableBody>
             <TableFooter>
-                <TableRow className="bg-zinc-800 border-t border-zinc-800 pt-6 mt-6 hover:bg-zinc-800">
+                <TableRow className="bg-zinc-800 border-t border-zinc-800 hover:bg-zinc-800">
                     <TableCell colSpan={5} className="text-lg text-zinc-400 font-medium">Subtotal</TableCell>
                     <TableCell className="text-xl text-tomato font-bold">${totalPrice.toFixed(2)}</TableCell>
                 </TableRow>

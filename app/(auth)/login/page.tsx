@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Suspense, useState } from "react";
@@ -5,11 +6,13 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import Scene from "@/components/Scene";
 import { TransitionLink } from "@/components/utils/TransitionLink";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPwd, setShowPwd] = useState(false);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -19,133 +22,115 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      // Here you would normally have authentication logic
-      const res = await axios.post("/api/auth/login", {
-        email,
-        password,
-      });
-      if (res.status !== 200) {
-        throw new Error("Login failed");
-      }
-      console.log("Login attempted with:", email, password);
-      
-      // Simulate authentication success
+      const res = await axios.post("/api/auth/login", { email, password });
+      if (res.status !== 200) throw new Error("Login failed");
       setTimeout(() => {
-        router.push("/"); // Redirect after successful login
+        router.push("/");
         setIsLoading(false);
-      }, 1000);
+      }, 800);
     } catch (err) {
-        console.log("Login error:", err);
-        setError("Invalid credentials. Please try again.");
-        setIsLoading(false);
+      setError("Invalid credentials. Please try again." + (err instanceof Error ? `: ${err.message}` : ""));
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="justify-center items-center h-screen bg-primary grid grid-cols-1 md:grid-cols-2 gap-4 px-6 md:px-16">
-      <div className="h-screen order-2 hidden md:block">
+    <div className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-gradient-to-br px-4 md:px-12">
+      {/* Scene/Left Side */}
+      <div className="hidden md:flex h-screen w-1/2 items-center justify-center">
         <Suspense>
-          <Scene rotateX={3} />
+          <Scene rotateX={-3} />
         </Suspense>
       </div>
-      <div className="flex items-center justify-center h-screen order-1 text-white">
-        <div className="w-full max-w-md space-y-8 rounded-lg  p-8 shadow-md">
-          <div>
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-tomato">
+      {/* Form/Right Side */}
+      <div className="w-full md:w-1/2 flex items-center justify-center min-h-screen">
+        <div className="w-full max-w-md bg-zinc-900/90 rounded-2xl p-8 shadow-2xl border border-zinc-800 backdrop-blur-md">
+          <div className="mb-7 text-center">
+            <h2 className="text-3xl font-extrabold font-clash-semibold text-tomato mb-1 drop-shadow">
               Sign in to your account
             </h2>
-            <p className="mt-2 text-center text-sm text-gray-300">
-
-              Sign in to get started with Pizzario. 
-            </p>
-
+            <p className="text-gray-300 text-base">Sign in to get started with <span className="font-bold">Pizzario</span></p>
           </div>
-          
+
           {error && (
-            <div className="rounded-md bg-red-50 p-4">
-              <div className="text-sm text-red-700">{error}</div>
+            <div className="rounded-lg bg-red-100/90 border border-red-400 px-3 py-2 text-red-700 text-sm mb-4 animate-shake">
+              {error}
             </div>
           )}
-          
-          <form className="mt-8 space-y-6" onSubmit={handleSubmit} noValidate>
-            <div className="space-y-4 rounded-md shadow-sm">
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-400">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-500 focus:z-10 focus:border-tomato focus:outline-none focus:ring-tomato"
-                  placeholder="Email address"
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium mb-2 text-gray-400">
-                  Password
-                </label>
+
+          <form className="space-y-5" onSubmit={handleSubmit} noValidate>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-1">Email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-2 rounded-md bg-zinc-800/80 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-tomato transition placeholder-gray-500"
+                placeholder="you@example.com"
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-400 mb-1">Password</label>
+              <div className="relative">
                 <input
                   id="password"
                   name="password"
-                  type="password"
+                  type={showPwd ? "text" : "password"}
                   autoComplete="current-password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-500 focus:z-10 focus:border-tomato focus:outline-none focus:ring-tomato"
-                  placeholder="Password"
+                  className="w-full px-4 py-2 rounded-md bg-zinc-800/80 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-tomato transition placeholder-gray-500 "
+                  placeholder="Your password"
                 />
+                <button
+                  type="button"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition"
+                  onClick={() => setShowPwd(!showPwd)}
+                >
+                  {showPwd ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}
+                </button>
+                
               </div>
             </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
+            <div className="flex items-center justify-between gap-2">
+              <label className="flex items-center text-gray-300 cursor-pointer">
                 <input
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-tomato focus:ring-tomato cursor-pointer"
+                  className="h-4 w-4 rounded border-gray-400 text-tomato focus:ring-tomato"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-200">
-                  Remember me
-                </label>
-              </div>
-
-              <div className="text-sm">
-                <a href="#" className="font-medium text-tomato/80 hover:text-tomato">
-                  Forgot your password?
-                </a>
-              </div>
+                <span className="ml-2 text-sm">Remember me</span>
+              </label>
+              <TransitionLink href="/forgot-password" className="text-tomato/80 hover:text-tomato text-sm font-medium">
+                Forgot password?
+              </TransitionLink>
             </div>
-
-            <div>
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="group relative flex w-full justify-center rounded-md border border-transparent bg-tomato py-2 px-4 text-sm font-medium text-white hover:bg-tomato/80 focus:outline-none focus:ring-1 focus:ring-white focus:ring-offset-0 cursor-pointer"
-              >
-                {isLoading ? "Signing in..." : "Sign in"}
-              </button>
-            </div>
-
-            <div className="text-center text-sm text-amber-50">
-              <p>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={`w-full py-2 rounded-md text-lg font-bold bg-tomato hover:bg-tomato/90 text-white shadow-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-tomato focus:ring-offset-2 ${isLoading ? "opacity-60" : ""}`}
+            >
+              {isLoading ? "Signing in..." : "Sign in"}
+            </button>
+            <div className="text-center text-sm text-zinc-200 mt-2">
+              <span>
                 Don&apos;t have an account?{" "}
-                <TransitionLink href="/signup" >
-                <span className="font-medium text-tomato/80 hover:text-tomato">Register here</span>
+                <TransitionLink href="/signup">
+                  <span className="font-semibold text-tomato hover:underline">
+                    Register here
+                  </span>
                 </TransitionLink>
-              </p>
+              </span>
             </div>
           </form>
         </div>
       </div>
-      
     </div>
   );
 }

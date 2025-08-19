@@ -1,48 +1,49 @@
 import React from 'react'
-import Link from 'next/link'
+
 
 const Hero = () => {
     return (
-       <section className='relative w-full min-h-screen bg-primary flex items-center justify-center bg-cover bg-center hero-bg'>
-        <div className='absolute w-full h-full bg-primary/80'></div>
-        
-        
-        
-         <div className='absolute text-center px-4 sm:px-6 md:px-8 max-w-4xl mx-auto'>
-             <h1 className='text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-ragas text-tomato font-bold'>PIZZAR.3IO</h1>
-             <p className='text-white font-chunk text-xl sm:text-2xl md:text-3xl lg:text-4xl mt-2 mb-6'>Taste the best pizza in town</p>
-             
-             <p className='text-white/80 font-sans text-sm sm:text-base mx-auto max-w-2xl mb-8'>
-               Handcrafted with love using only the freshest ingredients and authentic Italian recipes. 
-               Our wood-fired pizzas bring the true taste of Naples right to your table.
-             </p>
-             
-             <div className='flex flex-col sm:flex-row gap-4 justify-center items-center'>
-               <Link href="/menu" className='px-6 py-3 bg-tomato text-white font-poppins font-semibold rounded-full hover:bg-tomato/80 transition-all duration-300 text-base sm:text-lg'>
-                 Our Menu
-               </Link>
-               <Link href="/order" className='px-6 py-3 bg-white text-tomato font-poppins font-semibold rounded-full hover:bg-white/90 transition-all duration-300 text-base sm:text-lg'>
-                 Order Now
-               </Link>
-             </div>
-             
-             <div className='mt-12 flex items-center justify-center gap-6'>
-               <div className='w-10 h-10 rounded-full bg-white/10 flex items-center justify-center cursor-pointer'>
-                 <span className='text-white'>🍕</span>
-               </div>
-               <div className='w-10 h-10 rounded-full bg-white/10 flex items-center justify-center cursor-pointer'>
-                 <span className='text-white'>🧀</span>
-               </div>
-               <div className='w-10 h-10 rounded-full bg-white/10 flex items-center justify-center cursor-pointer'>
-                 <span className='text-white'>🍅</span>
-               </div>
-             </div>
-         </div>
-         
-         <div className='absolute bottom-6 left-0 right-0 text-center'>
-           <p className='text-white/70 text-sm'>Open 7 days a week | 11:00 AM - 11:00 PM</p>
-         </div>
-       </section>
+      <section className="w-full min-h-dvh flex flex-col items-center relative py-36">
+            <div className="absolute inset-0 overflow-clip w-full p-2">
+              <div className='w-full relative rounded-lg h-[98vh] overflow-clip'>
+                <div className="absolute inset-0 bg-wood-950/20 backdrop-blur-[2px] z-10"></div>
+                  <video
+                    src="/videos/hero.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    aria-hidden="true"
+                    className="absolute inset-0 w-full h-full object-cover object-center rounded-lg select-none pointer-events-none blur-[2px]"
+                  />
+              </div>
+            </div>
+          <div className='absolute inset-0 flex flex-col items-center justify-center w-full h-full'>
+
+            <div className="flex flex-col items-center z-10 leading-10 md:leading-none">
+              {/* line 1 */}
+              <div className="relative w-full flex justify-center pointer-events-none select-none my-1">
+                <span aria-hidden className="absolute text-wood-950 translate-y-3 text-[2.5rem] md:text-8xl font-oi">Authentic</span>
+                <span className="relative text-transparent bg-clip-text bg-gradient-to-br from-wood-100 to-wood-200 text-[2.5rem] md:text-8xl font-oi">Authentic</span>
+              </div>
+
+              {/* line 2 */}
+              <div className="relative w-full flex justify-center pointer-events-none select-none my-1">
+                <span aria-hidden className="absolute text-wood-950 translate-y-3 text-[2.5rem] md:text-8xl font-oi"> • Fresh • </span>
+                <span className="relative text-transparent bg-clip-text bg-gradient-to-br from-wood-100 to-wood-200 text-[2.5rem] md:text-8xl font-oi"> • Fresh • </span>
+              </div>
+
+              {/* line 3 */}
+              <div className="relative w-full flex justify-center pointer-events-none select-none my-1">
+                <span aria-hidden className="absolute text-wood-950 translate-y-3 text-[2.5rem] md:text-8xl font-oi">Delicious</span>
+                <span className="relative text-transparent bg-clip-text bg-gradient-to-br from-wood-100 to-wood-200 text-[2.5rem] md:text-8xl font-oi">Delicious</span>
+              </div>
+            </div>
+          </div>
+
+          
+      </section>
       );
 }
 

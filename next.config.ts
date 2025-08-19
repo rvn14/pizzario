@@ -5,7 +5,9 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  /* config options here */
+  images: {
+    domains: ["*"],
+  },
 };
 
 export default nextConfig;

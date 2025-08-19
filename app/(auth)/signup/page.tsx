@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+
 import React, { Suspense, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import { signupSchema, type SignupFormData } from '@/lib//rules';
+import { signupSchema, type SignupFormData } from '@/lib/rules';
 import Scene from '@/components/Scene';
-import { toast } from "sonner"
+import { toast } from "sonner";
+import { Eye, EyeOff } from "lucide-react";
 import { TransitionLink } from '@/components/utils/TransitionLink';
 
 const SignupPage = () => {
@@ -16,6 +18,8 @@ const SignupPage = () => {
     password: '',
     confirmPassword: ''
   });
+  const [showPwd, setShowPwd] = useState(false);
+  const [showConfirmPwd, setShowConfirmPwd] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [serverError, setServerError] = useState<string | null>(null);
@@ -28,26 +32,17 @@ const SignupPage = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); 
+    e.preventDefault();
     setServerError(null);
-    
     try {
       // Validate form data against schema
       const validatedData = signupSchema.parse(formData);
-      
-      // If validation passes, clear errors
       setErrors({});
-      
-      // Set loading state
       setIsLoading(true);
-      
       // Send data to API endpoint
       const res = await axios.post('/api/auth/signup', validatedData);
-      
-      // Handle response - if we get here, the request was successful
-      console.log('User registered successfully:', res.data);
-      
-      // Redirect to login page after successful signup
+      if (res.status !== 201) throw new Error('Signup failed');
+      toast.success("Account created! Please login.");
       router.push('/login');
     } catch (error: any) {
       // Handle validation errors
@@ -58,15 +53,15 @@ const SignupPage = () => {
         });
         setErrors(formattedErrors);
       } else if (axios.isAxiosError(error)) {
-        // Handle specific axios errors with better error messages
         setServerError(
-          error.response?.data?.message || 
-          `Error: ${error.response?.status} - ${error.message}` || 
+          error.response?.data?.message ||
+          `Error: ${error.response?.status} - ${error.message}` ||
           'Failed to sign up'
         );
+        toast.error(error.response?.data?.message || 'Signup failed!');
       } else {
-        // Handle other errors
         setServerError(error.message || 'An error occurred during signup');
+        toast.error(error.message || 'Signup failed!');
       }
     } finally {
       setIsLoading(false);
@@ -74,38 +69,30 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="justify-center items-center h-screen bg-primary grid grid-cols-1 md:grid-cols-2 gap-4 px-8 md:px-16 text-white">
-      
-      <div className='h-screen w-full bg-primary hidden md:block'>
-          <Suspense>
-            <Scene rotateX={-3} />
-          </Suspense>
+    <div className="min-h-screen bg-gradient-to-br flex items-center justify-center px-4 md:px-16">
+      <div className="hidden md:flex h-screen w-1/2 items-center justify-center">
+        <Suspense>
+          <Scene rotateX={-3} />
+        </Suspense>
       </div>
-      <div className="relative z-10 flex items-center justify-center h-screen ">
-        <div className="w-full max-w-md p-8 space-y-8  rounded-lg shadow-md">
-          <div className="text-center">
-            <h1 className="text-3xl font-extrabold text-tomato">Create an Account</h1>
-            <p className="mt-2 text-gray-300">Sign up to get started with Pizzario</p>
+      <div className="w-full md:w-1/2 flex items-center justify-center min-h-screen">
+        <div className="w-full max-w-md bg-zinc-900/90 rounded-2xl p-8 shadow-2xl border border-zinc-800 backdrop-blur-md">
+          <div className="mb-7 text-center">
+            <h1 className="text-3xl font-extrabold font-clash-semibold text-tomato mb-1 drop-shadow">
+              Create an Account
+            </h1>
+            <p className="text-gray-300 text-base">Sign up to get started with <span className="font-bold">Pizzario</span></p>
           </div>
-          
+
           {serverError && (
-            // Replace the old error div with shadcn/ui Sonnet
-            toast(serverError, {
-              description: "Please try again.",
-              duration: 5000,
-              style: {
-                backgroundColor: 'var(--popover)',
-                color: 'var(--popover-foreground)',
-                borderColor: 'var(--border)',
-              },
-            })
+            <div className="rounded-lg bg-red-100/90 border border-red-400 px-3 py-2 text-red-700 text-sm mb-4 animate-shake">
+              {serverError}
+            </div>
           )}
-          
-          <form className="mt-8 space-y-6" onSubmit={handleSubmit} noValidate>
+
+          <form className="space-y-5" onSubmit={handleSubmit} noValidate>
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-400">
-                User Name
-              </label>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-1">User Name</label>
               <input
                 id="name"
                 name="name"
@@ -113,17 +100,15 @@ const SignupPage = () => {
                 required
                 value={formData.name}
                 onChange={handleChange}
-                className={`mt-1 block w-full px-3 py-2 border ${errors.name ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-tomato focus:border-tomato`}
+                className={`w-full px-4 py-2 rounded-md bg-zinc-800/80 border ${errors.name ? 'border-red-500' : 'border-gray-700'} text-white focus:outline-none focus:ring-2 focus:ring-tomato transition placeholder-gray-500`}
+                placeholder="Full Name"
               />
               {errors.name && (
-                <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+                <p className="mt-1 text-sm text-red-400">{errors.name}</p>
               )}
             </div>
-            
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-400">
-                Email
-              </label>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-1">Email</label>
               <input
                 id="email"
                 name="email"
@@ -131,70 +116,85 @@ const SignupPage = () => {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                className={`mt-1 block w-full px-3 py-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-tomato focus:border-tomato`}
+                className={`w-full px-4 py-2 rounded-md bg-zinc-800/80 border ${errors.email ? 'border-red-500' : 'border-gray-700'} text-white focus:outline-none focus:ring-2 focus:ring-tomato transition placeholder-gray-500`}
+                placeholder="your@email.com"
               />
               {errors.email && (
-                <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                <p className="mt-1 text-sm text-red-400">{errors.email}</p>
               )}
             </div>
-            
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-400">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                value={formData.password}
-                onChange={handleChange}
-                className={`mt-1 block w-full px-3 py-2 border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-tomato focus:border-tomato`}
-              />
+              <label htmlFor="password" className="block text-sm font-medium text-gray-400 mb-1">Password</label>
+              <div className="relative">
+                <input
+                  id="password"
+                  name="password"
+                  type={showPwd ? "text" : "password"}
+                  required
+                  value={formData.password}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-2 rounded-md bg-zinc-800/80 border ${errors.password ? 'border-red-500' : 'border-gray-700'} text-white focus:outline-none focus:ring-2 focus:ring-tomato transition placeholder-gray-500 pr-12`}
+                  placeholder="Password"
+                />
+                <button
+                  type="button"
+                  aria-label={showPwd ? "Hide password" : "Show password"}
+                  onClick={() => setShowPwd(v => !v)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-tomato transition"
+                  tabIndex={-1}
+                >
+                  {!showPwd ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
               {errors.password && (
-                <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+                <p className="mt-1 text-sm text-red-400">{errors.password}</p>
               )}
             </div>
-            
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-400">
-                Confirm Password
-              </label>
-              <input
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                required
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                className={`mt-1 block w-full px-3 py-2 border ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-tomato focus:border-tomato`}
-              />
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-400 mb-1">Confirm Password</label>
+              <div className="relative">
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type={showConfirmPwd ? "text" : "password"}
+                  required
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-2 rounded-md bg-zinc-800/80 border ${errors.confirmPassword ? 'border-red-500' : 'border-gray-700'} text-white focus:outline-none focus:ring-2 focus:ring-tomato transition placeholder-gray-500 pr-12`}
+                  placeholder="Repeat password"
+                />
+                <button
+                  type="button"
+                  aria-label={showConfirmPwd ? "Hide password" : "Show password"}
+                  onClick={() => setShowConfirmPwd(v => !v)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-tomato transition"
+                  tabIndex={-1}
+                >
+                  {showConfirmPwd ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}
+                </button>
+              </div>
               {errors.confirmPassword && (
-                <p className="mt-1 text-sm text-red-600">{errors.confirmPassword}</p>
+                <p className="mt-1 text-sm text-red-400">{errors.confirmPassword}</p>
               )}
             </div>
-            
-            <div>
-              <button
-                type="submit"
-                disabled={isLoading}
-                className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white cursor-pointer ${isLoading ? 'bg-tomato' : 'bg-tomato hover:bg-tomato/80'} focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-white`}
-              >
-                {isLoading ? 'Signing Up...' : 'Sign Up'}
-              </button>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={`w-full py-2 rounded-md text-lg font-bold bg-tomato hover:bg-tomato/90 text-white shadow-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-tomato focus:ring-offset-2 ${isLoading ? "opacity-60" : ""}`}
+            >
+              {isLoading ? 'Signing Up...' : 'Sign Up'}
+            </button>
+            <div className="text-center text-sm text-zinc-200 mt-2">
+              <span>
+                Already have an account?{" "}
+                <TransitionLink href="/login">
+                  <span className="font-semibold text-tomato hover:underline">
+                    Log in
+                  </span>
+                </TransitionLink>
+              </span>
             </div>
           </form>
-          
-          <div className="text-center mt-4">
-            <p className="text-sm text-gray-200">
-              Already have an account?{' '}
-              <TransitionLink href="/login" >
-              <span className="font-medium text-tomato hover:text-tomato/80">
-                Log in
-              </span>
-              </TransitionLink>
-            </p>
-          </div>
         </div>
       </div>
     </div>
