@@ -44,8 +44,8 @@ const Reservations = () => {
         </div>
 
         <div className='mt-16 w-full flex flex-col items-center'>
-            <h2 className="text-3xl md:text-4xl font-bold font-abriel text-center text-crown-800">Ready to Create Your Story?</h2>
-            <p className='font-abriel text-lg md:text-xl mt-4 text-center max-w-2xl text-cocoa-700'>
+            <h2 className="text-3xl md:text-4xl font-bold font-abriel text-center text-crown-600">Ready to Create Your Story?</h2>
+            <p className='font-abriel text-lg md:text-xl mt-4 text-center max-w-2xl text-cocoa-800'>
                 Join us at Pizzario, where every meal is a memory waiting to be made. Reserve your table today and let the stories unfold!
             </p>
         </div>
