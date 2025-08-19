@@ -18,7 +18,7 @@ const MenuButton: React.FC<MenuButtonProps> = ({ children = 'Explore More', onCl
           'py-[17px]',            
           'rounded-full',
           'border-0',
-          'bg-crown-500',       
+          'bg-crown-600',       
           'text-crown-50',
           'tracking-[1.5px]',
           'text-md',

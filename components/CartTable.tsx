@@ -64,31 +64,38 @@ export function CartSheet() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button asChild variant="ghost" className="fixed bottom-0 bg-bunting-950 text-bunting-100 hover:text-bunting-100 w-6 h-6 !p-6 hover:bg-bunting-950/90 border-0 rounded-full cursor-pointer">
+        <Button asChild variant="ghost" className="fixed bottom-0 bg-crown-700 text-crown-100 hover:text-crown-100 w-6 h-6 !p-6 hover:bg-crown-700/90 border-0 rounded-full cursor-pointer">
           <div className="relative">
             <ShoppingCartIcon className="w-6 h-6" />
-            {items.length > 0 && <div className="red-dot z-20 absolute top-0 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>}
+            {items.length > 0 && <div className="red-dot z-20 absolute top-0 -right-1 w-3 h-3 rounded-full"></div>}
           </div>
         </Button>
       </SheetTrigger>
-      <SheetContent className="min-w-[350px] max-w-[400px] p-0 flex flex-col bg-[#18181b] shadow-2xl border border-zinc-800 rounded-2xl z-90">
-        <SheetHeader className="bg-tomato text-primary px-6 py-4">
-          <SheetTitle className="text-2xl font-clash-bold tracking-wide ">Ordered Items</SheetTitle>
-          <SheetDescription className="text-zinc-800">Review your selected items and proceed to checkout.</SheetDescription>
+      <SheetContent className="min-w-[350px] max-w-[400px] p-0 flex flex-col bg-cocoa-100 shadow-2xl border border-cocoa-800 rounded-2xl z-90">
+        <SheetHeader className="bg-crown-700 text-crown-50 px-6 py-4 relative">
+          <div className='absolute inset-0 overflow-hidden mix-blend-screen select-none pointer-events-none z-10'>
+              <Image src="/images/bg.jpg" alt="Hero Background" layout="fill" objectFit="cover" className="object-cover" />
+          </div>
+          <SheetTitle className="text-2xl text-crown font-abriel font-bold tracking-wide ">Ordered Items</SheetTitle>
+          <SheetDescription className="text-crown-50/80">Review your selected items and proceed to checkout.</SheetDescription>
         </SheetHeader>
-        <div className="flex-1 px-4 py-4 overflow-y-auto">
-          <ScrollArea className="h-full w-full rounded-md ">
+        <div className="flex-1 p-4 relative overflow-y-auto">
+
+          <div className='absolute inset-0 overflow-hidden mix-blend-screen select-none pointer-events-none z-90'>
+              <Image src="/images/bg.jpg" alt="Hero Background" layout="fill" objectFit="cover" className="object-cover" />
+          </div>
+          <ScrollArea className="h-full w-full rounded-md">
           
-          <div className="divide-y divide-zinc-500">
+          <div className="divide-y divide-cocoa-500">
             {items.length === 0 ? (
-              <div className="py-8 text-center text-zinc-500">Your cart is empty.</div>
+              <div className="py-8 text-center text-cocoa-500">Your cart is empty.</div>
             ) : (
               items.map((item, idx) => (
-                <div key={ idx} className="flex items-center p-3 bg-zinc-800">
+                <div key={ idx} className="flex items-center p-3 bg-cocoa-950">
                   <Image src={item.image || "/images/pizzas/margherita.jpg"} alt={item.name || "Pizza"} width={48} height={48} className="rounded-lg object-cover mr-4" />
                   <div className="flex-1">
-                    <div className="font-semibold text-lg text-white">{item.name} {item.size && <span className="text-sm text-zinc-400">({item.size})</span> }</div>
-                    <div className="flex items-center gap-2 text-zinc-400 text-sm">
+                    <div className="font-semibold text-lg text-cocoa-100">{item.name} {item.size && <span className="text-sm text-cocoa-300">({item.size})</span> }</div>
+                    <div className="flex items-center gap-2 text-cocoa-300 text-sm">
                       <div>
                             {/* item count */}
                             <div className='flex items-center gap-2'>
@@ -108,8 +115,8 @@ export function CartSheet() {
                             </div>
 
                         </div>
-                      <div className="text-tomato font-bold">${item.price?.toFixed(2) || "0.00"}</div>
-                      <div> <span className="text-zinc-400">x</span> {item.quantity}</div>
+                      <div className="text-crown-600 font-bold">${item.price?.toFixed(2) || "0.00"}</div>
+                      <div> <span className="text-cocoa-400">x</span> {item.quantity}</div>
                       <div className="font-bold text-green-500">${calculateSubtotal(item).toFixed(2) || "0.00"}</div>
                     </div>
                   </div>
@@ -128,18 +135,22 @@ export function CartSheet() {
           </div>
           </ScrollArea>
         </div>
-        <div className="px-6 py-4 border-t border-gray-500 bg-zinc-900">
+        <div className="px-6 py-4 border-t border-gray-500 bg-crown-700 relative">
+            <div className='absolute inset-0 overflow-hidden mix-blend-screen select-none pointer-events-none z-10'>
+              <Image src="/images/bg.jpg" alt="Hero Background" layout="fill" objectFit="cover" className="object-cover" />
+          </div>
+
           <div className="flex justify-between items-center mb-4">
-            <span className="font-semibold text-lg text-zinc-200">Total</span>
-            <span className="font-bold text-tomato text-xl">${totalPrice.toFixed(2)}</span>
+            <span className="font-semibold text-lg text-crown-100">Total</span>
+            <span className="font-bold text-crown-100 text-xl">${totalPrice.toFixed(2)}</span>
           </div>
           <SheetFooter className="flex gap-2">
-            <Button onClick={handleCheckout} type="button" className="flex-1 bg-tomato text-white hover:bg-tomato/80 shadow focus:outline-none focus:ring-0 focus:ring-offset-0 cursor-pointer">Checkout</Button>
+            <Button onClick={handleCheckout} type="button" className="flex-1 bg-crown-900 text-white hover:bg-crown-900/80 shadow focus:outline-none focus:ring-0 focus:ring-offset-0 cursor-pointer z-20">Checkout</Button>
             <SheetClose asChild>
               <Button
                 ref={sheetCloseRef}
                 variant="outline"
-                className="flex-1 border-zinc-700 text-zinc-300 hover:text-white bg-zinc-900 hover:bg-zinc-800 focus:ring-0 focus:ring-offset-0 cursor-pointer"
+                className="flex-1 border-cocoa-700 text-cocoa-300 hover:text-white bg-cocoa-900 hover:bg-cocoa-800 focus:ring-0 focus:ring-offset-0 cursor-pointer z-20"
               >
                 Close
               </Button>

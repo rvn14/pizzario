@@ -3,6 +3,8 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { ItemList, PizzaList } from '@/components/MenuItems';
 import { CupSodaIcon, Dessert, Pizza } from "lucide-react";
+import Navbar from "@/components/Navbar";
+import Image from "next/image";
 
 
 const Menu = () => {
@@ -55,36 +57,44 @@ const Menu = () => {
       
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-zinc-950 to-zinc-900 px-4 py-12">
-      <div className="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed opacity-30" style={{ backgroundImage: "url('/images/bg.jpg')" }}></div>
+    <div className="relative min-h-screen flex items-center bg-crown-950 justify-center px-4 py-24 ">
+        {<Navbar />}
+      <div className='fixed inset-0 overflow-hidden mix-blend-screen select-none pointer-events-none'>
+          <Image src="/images/bg.jpg" alt="Hero Background" layout="fill" objectFit="cover" className="object-cover opacity-40" />
+      </div>
+      
       <div className="relative w-full max-w-6xl z-10 flex flex-col items-center justify-center">
-        <h1 className="text-white font-clash-semibold text-5xl md:text-6xl mb-2 drop-shadow-lg tracking-tight">Our Menu</h1>
-        <p className="text-zinc-400 font-poppins text-lg mb-10 text-center">Explore our delicious pizzas and more!</p>
+          <div className="max-w-lg mx-auto text-center text-crown-100 select-none mb-8">
+            <h2 className="text-4xl md:text-6xl font-bold font-abriel ">OUR</h2>
+              <h1 className="text-5xl md:text-8xl font-oi -rotate-3 [text-shadow:0_10px_0_theme(colors.crown.950)]">
+              MENU
+              </h1>
+          </div>
         {loading ? (
           <div className="flex flex-col items-center justify-center mt-20">
-            <div className="animate-spin rounded-full border-8 border-t-tomato border-b-zinc-800 border-l-zinc-800 border-r-tomato h-20 w-20 mb-6 shadow-lg bg-white/10 flex items-center justify-center">
-              <span className="text-tomato text-4xl">
+            <div className="animate-spin rounded-full border-8 border-t-crown-400 border-b-zinc-800 border-l-zinc-800 border-r-crown-400 h-20 w-20 mb-6 shadow-lg bg-crown-50/10 flex items-center justify-center">
+              <span className="text-crown-400 text-4xl">
                 <Pizza />
               </span>
             </div>
           </div>
         ) : (
           <div className="w-full flex flex-col gap-12">
-            <div className="bg-zinc-900/80 border border-zinc-800 rounded-xl shadow-lg p-8">
-              <h2 className="text-white/90 font-clash-semibold text-2xl mb-4 flex items-center gap-2">
-                <span className="text-tomato"><Pizza/></span> Pizza Collection
+            <div className=" rounded-xl p-8">
+              <h2 className="text-crown-50/90 font-clash-semibold text-2xl mb-4 flex items-center gap-2">
+                <span className="text-crown-400"><Pizza/></span> Pizza Collection
               </h2>
               {data && <PizzaList pizzas={data.pizzas} />}
             </div>
-            <div className="bg-zinc-900/80 border border-zinc-800 rounded-xl shadow-lg p-8">
-              <h2 className="text-white/90 font-clash-semibold text-2xl mb-4 flex items-center gap-2">
-                <span className="text-tomato"><Dessert/></span> Dessert Collection
+            <div className=" rounded-xl  p-8">
+              <h2 className="text-crown-50/90 font-clash-semibold text-2xl mb-4 flex items-center gap-2">
+                <span className="text-crown-400"><Dessert/></span> Dessert Collection
               </h2>
               {data && <ItemList items={data.desserts} />}
             </div>
-            <div className="bg-zinc-900/80 border border-zinc-800 rounded-xl shadow-lg p-8">
-              <h2 className="text-white/90 font-clash-semibold text-2xl mb-4 flex items-center gap-2">
-                <span className="text-tomato"><CupSodaIcon/></span> Beverages Collection
+            <div className="rounded-xl  p-8">
+              <h2 className="text-crown-50/90 font-clash-semibold text-2xl mb-4 flex items-center gap-2">
+                <span className="text-crown-400"><CupSodaIcon/></span> Beverages Collection
               </h2>
               {data && <ItemList items={data.beverages} />}
             </div>
