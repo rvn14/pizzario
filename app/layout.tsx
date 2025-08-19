@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Provider from "./Provider";
 import { Toaster } from "@/components/ui/sonner"
-
-
+import Footer from "@/components/Footer";
+import { ReactLenis } from 'lenis/react';
 
 export const metadata: Metadata = {
   title: "Pizzario",
@@ -18,15 +17,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased`}
+  className={`antialiased w-full min-h-screen overflow-x-hidden`}
       >
-        
-        <Provider>
-          
+          <ReactLenis root />
           {children}
+          <Footer />
           <Toaster />
-        </Provider>
-        
+          <ReactLenis root />
       </body>
     </html>
   );

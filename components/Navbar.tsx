@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { useWindowScroll } from "react-use";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Menu, ShoppingCartIcon, X } from "lucide-react";
+import { Menu, ShoppingCartIcon, User2, User2Icon, UserCircle2Icon, X } from "lucide-react";
 import { Button } from "./ui/button";
 import axios from "axios";
 import { CartSheet } from "./CartTable";
@@ -13,6 +13,7 @@ import { TransitionLink } from "./utils/TransitionLink";
 const Navbar = () => {
   // Refs for navigation container
   const navContainerRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const lastScrollYRef = useRef(0); // New ref to track last scroll position
   const isNavVisibleRef = useRef(true); // New ref to track visibility without state updates
@@ -41,14 +42,20 @@ const Navbar = () => {
       // Topmost position: show navbar without floating-nav
       shouldBeVisible = true;
       navContainerRef.current?.classList.remove("floating-nav-black");
+      logoRef.current?.classList.add( "opacity-100");
+      
     } else if (currentScrollY > lastScrollYRef.current) {
       // Scrolling down: hide navbar and apply floating-nav
       shouldBeVisible = false;
       navContainerRef.current?.classList.add("floating-nav-black");
+      logoRef.current?.classList.remove( "opacity-100");
+      
     } else if (currentScrollY < lastScrollYRef.current) {
       // Scrolling up: show navbar with floating-nav
       shouldBeVisible = true;
       navContainerRef.current?.classList.add("floating-nav-black");
+      logoRef.current?.classList.remove( "opacity-100");
+      
     }
 
     // Only set state if visibility actually changed
@@ -119,56 +126,41 @@ const Navbar = () => {
     <>
       <div
         ref={navContainerRef}
-        className="fixed inset-x-0 top-4 z-50 h-16 border-none transition-all duration-700 sm:inset-x-6 py-4 rounded-2xl">
-        <header className="absolute top-1/2 w-full -translate-y-1/2">
-          <nav className="flex size-full items-center justify-between p-4">
-            {/* Logo and Product button */}
-            <TransitionLink href={"/"}>
-            <div className="flex flex-col items-center ml-5">
-              <div className="font-ragas text-blue-50 font-black text-2xl pointer-events-none select-none">PIZZAR.3IO</div>
-              <div className="font-chunk text-blue-50 text-xs pointer-events-none select-none -mt-2">EST. 1995</div>
+        className="fixed top-4 flex items-center z-50 h-16 border-none transition-all duration-700 w-full md:max-w-7xl rounded-lg text-wood-100"
+      >
+        <header className="absolute top-1/2 w-full -translate-y-1/2 h-full flex items-center justify-center px-4 rounded-full">
+          <div ref={logoRef} className="transition-all duration-700 text-wood-50 z-10">
+            <TransitionLink href={"/"} className="flex flex-col items-center">
+              <p className="font-ragas font-black text-3xl pointer-events-none select-none">
+                PIZZA
+                <span className="text-transparent bg-gradient-to-r from-anzac-400 to-anzac-300 bg-clip-text">
+                  R.3IO
+                </span>
+              </p>
+                
+              </TransitionLink>
             </div>
-            </TransitionLink>
-
-            {/* Hamburger menu button - visible on mobile */}
-            <div className="md:hidden flex items-center gap-4">
-            <Button asChild variant="outline" className="relative text-tomato bg-transparent border-2 border-tomato rounded-2xl hover:bg-tomato hover:text-primary">
-              <Link href="/cart" onClick={handleNavigation}>
-                <ShoppingCartIcon/>
-                <div className="red-dot z-20 absolute top-0 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
-              </Link>
-            </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                onClick={toggleMobileMenu}
-                className="text-black bg-tomato hover:bg-tomato/80 cursor-pointer"
-              >
-                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} className="" />}
-              </Button>
-              
-            </div>
-
-            {/* Navigation Links - visible on desktop */}
-            <div className="hidden md:flex h-full items-center justify-between mr-5 space-x-5">
-              <div className="text-white font-poppin text-md nav-hover-btn">
-                <TransitionLink href="/">Home</TransitionLink>
-              </div>
-              <div className="text-white font-poppin text-md nav-hover-btn">
-                <TransitionLink href="/menu">Menu</TransitionLink>
-              </div>
-              <div className="text-white font-poppin text-md nav-hover-btn">
-                <TransitionLink href="/contact">Contact</TransitionLink>
-              </div>
-              
-              <CartSheet />
-              {isLogged?<Button onClick={handleLogout} asChild className="bg-tomato hover:bg-tomato/80 text-primary font-poppins">
-                <Link href="">Logout</Link>
-              </Button>:<Button asChild className="bg-tomato hover:bg-tomato/80 text-primary font-poppins">
-                <Link href="/signup">Signup</Link>
-              </Button>}
-            </div>
-          </nav>
+            <nav className="absolute inset-0 flex items-center justify-between px-16">
+                <div className="hidden md:flex gap-8 font-abriel text-lg">
+                  <TransitionLink href="/menu" className="hover:text-wood-50 transition-all duration-300">Menu</TransitionLink>
+                  <TransitionLink href="/about" className="hover:text-wood-50 transition-all duration-300">About</TransitionLink>
+                  <TransitionLink href="/contact" className="hover:text-wood-50 transition-all duration-300">Contact</TransitionLink>
+                </div>
+                <div className="hidden md:flex gap-8 font-abriel text-lg">
+                  
+                  {isLogged?<Button onClick={handleLogout} asChild className="bg-wood-100 hover:bg-wood-100/90 text-wood-950 font-abriel tracking-wider rounded-full">
+                    <Link href="" onClick={handleLogout} className="flex gap-2 items-center">
+                      <User2Icon className="w-6 h-6 bg-wood-950 text-wood-100 rounded-full group-hover:bg-wood-900 transition-all duration-300" />
+                      <span className="group-hover:text-wood-900 transition-all duration-300">Logout</span>
+                    </Link>
+                  </Button>:<Button asChild className="bg-wood-100 hover:bg-wood-100/90 text-wood-950 font-abriel tracking-wider rounded-full">
+                    <TransitionLink href="/signup" className="flex gap-2 items-center group">
+                      <User2Icon className="w-6 h-6 bg-wood-950 text-wood-100 rounded-full group-hover:bg-wood-900 transition-all duration-300" />
+                      <span className="group-hover:text-wood-900 transition-all duration-300">Signup</span>
+                    </TransitionLink>
+                  </Button>}
+                </div>
+            </nav>
         </header>
       </div>
 
@@ -208,11 +200,11 @@ const Navbar = () => {
           <div className="flex gap-4">
             
             {isLogged ? (
-              <Button onClick={handleLogout} asChild className="bg-tomato hover:bg-tomato/80 text-primary font-poppins">
+              <Button onClick={handleLogout} asChild className="bg-persimmon-100 hover:bg-persimmon-100/80 text-russett-800 font-poppins">
                 <Link href="" onClick={handleNavigation}>Logout</Link>
               </Button>
             ) : (
-              <Button asChild className="bg-tomato hover:bg-tomato/80 text-primary font-poppins">
+              <Button asChild className="bg-persimmon-100 hover:bg-persimmon-100/80 text-razzmatazz-500 font-poppins">
                 <Link href="/signup" onClick={handleNavigation}>Signup</Link>
               </Button>
             )}

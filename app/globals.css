@@ -1,5 +1,6 @@
 @import url('https://fonts.cdnfonts.com/css/general-sans') layer(base);
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Kirang+Haerang&family=Oi&family=Rock+3D&family=Rubik+Moonrocks&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
 
@@ -36,24 +37,184 @@ body:not(.page-transition) {
   transition: all 0.5s ease;
 }
 
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-credentials-auto-fill-button,
+input[type="password"]::-webkit-input-password-visible,
+input[type="password"]::-webkit-input-placeholder {
+  display: none !important;
+  pointer-events: none;
+}
+
+input[type="password"]::-webkit-input-password-visible {
+  display: none !important;
+}
+
 @theme inline {
   --color-primary: #050505;
 
+  --font-rubik: 'Rubik Moonrocks', sans-serif;
+  --font-cabin: 'Cabin Sketch', sans-serif;
+  --font-abriel: 'Abril Fatface', sans-serif;
+  --font-oi: 'Oi', sans-serif;
+  --font-rock: 'Rock 3D', sans-serif;
+  --font-kirang: 'Kirang Haerang', sans-serif;
   --font-ragas: 'Ragas', sans-serif;
   --font-chunk: 'ChunkFive', sans-serif;
   --font-poppins: 'Poppins', sans-serif;
-  --font-general: 'General Sans', sans-serif;
-  --font-inter: 'Inter', sans-serif;
-  --font-clash-extralight: 'ClashDisplay-Extralight', sans-serif;
-  --font-clash-light: 'ClashDisplay-Light', sans-serif;
-  --font-clash: 'ClashDisplay-Regular', sans-serif;       
-  --font-clash-medium: 'ClashDisplay-Medium', sans-serif;
-  --font-clash-semibold: 'ClashDisplay-Semibold', sans-serif;
-  --font-clash-bold: 'ClashDisplay-Bold', sans-serif;
-  --font-clash-variable: 'ClashDisplay-Variable', sans-serif;
 
   --color-charcoal: #050505;
   --color-violet-300: #5724ff;
+
+  --color-crown-50: #fef2f2;
+  --color-crown-100: #fee2e3;
+  --color-crown-200: #fdcbcd;
+  --color-crown-300: #fba6a9;
+  --color-crown-400: #f67377;
+  --color-crown-500: #ec474c;
+  --color-crown-600: #d9292f;
+  --color-crown-700: #b61f24;
+  --color-crown-800: #971d21;
+  --color-crown-900: #7b1e21;
+  --color-crown-950: #440b0d;
+
+--color-wood-50: #f8f5f0;
+--color-wood-100: #f2ece2;
+--color-wood-200: #e3d7c5;
+--color-wood-300: #d1bca0;
+--color-wood-400: #be9d79;
+--color-wood-500: #b1865e;
+--color-wood-600: #a37453;
+--color-wood-700: #885e46;
+--color-wood-800: #6f4d3d;
+--color-wood-900: #5a4134;
+--color-wood-950: #30211a;
+
+--color-shark-50: #f6f6f6;
+--color-shark-100: #e7e7e7;
+--color-shark-200: #d1d1d1;
+--color-shark-300: #b0b0b0;
+--color-shark-400: #888888;
+--color-shark-500: #6d6d6d;
+--color-shark-600: #5d5d5d;
+--color-shark-700: #4f4f4f;
+--color-shark-800: #454545;
+--color-shark-900: #3d3d3d;
+--color-shark-950: #1f1f1f;
+
+--color-anzac-50: #faf9ec;
+--color-anzac-100: #f4f0cd;
+--color-anzac-200: #ebdf9d;
+--color-anzac-300: #dfc865;
+--color-anzac-400: #d4af37;
+--color-anzac-500: #c59b2d;
+--color-anzac-600: #aa7a24;
+--color-anzac-700: #885920;
+--color-anzac-800: #724921;
+--color-anzac-900: #623e21;
+--color-anzac-950: #382010;
+
+--color-bunting-50: #eff6ff;
+--color-bunting-100: #dceafd;
+--color-bunting-200: #c1dbfc;
+--color-bunting-300: #96c4fa;
+--color-bunting-400: #64a4f6;
+--color-bunting-500: #4082f1;
+--color-bunting-600: #2a64e6;
+--color-bunting-700: #224fd3;
+--color-bunting-800: #2241ab;
+--color-bunting-900: #213a87;
+--color-bunting-950: #152046;
+
+--color-chalet-50: #f6f8ed;
+--color-chalet-100: #eaf0d7;
+--color-chalet-200: #d5e2b4;
+--color-chalet-300: #b9ce88;
+--color-chalet-400: #9eb962;
+--color-chalet-500: #809e44;
+--color-chalet-600: #637d33;
+--color-chalet-700: #556b2f;
+--color-chalet-800: #3f4e26;
+--color-chalet-900: #374324;
+--color-chalet-950: #1b240f;
+
+
+
+   --color-razzmatazz-50: #fff0f2;
+    --color-razzmatazz-100: #ffe1e7;
+    --color-razzmatazz-200: #ffc8d4;
+    --color-razzmatazz-300: #ff9bb2;
+    --color-razzmatazz-400: #ff638a;
+    --color-razzmatazz-500: #ff2d66;
+    --color-razzmatazz-600: #f40a54;
+    --color-razzmatazz-700: #e0014d;
+    --color-razzmatazz-800: #ad0443;
+    --color-razzmatazz-900: #940741;
+    --color-razzmatazz-950: #53001e;
+
+    --color-cocoa-50: #f7f4ef;
+    --color-cocoa-100: #ebe4d6;
+    --color-cocoa-200: #d8c9b0;
+    --color-cocoa-300: #c1a883;
+    --color-cocoa-400: #af8c60;
+    --color-cocoa-500: #a07a52;
+    --color-cocoa-600: #896245;
+    --color-cocoa-700: #6f4c39;
+    --color-cocoa-800: #5e4135;
+    --color-cocoa-900: #523931;
+    --color-cocoa-950: #2f1e1a;
+
+    --color-caramel-50: #fff7ed;
+    --color-caramel-100: #ffeed5;
+    --color-caramel-200: #ffdaac;
+    --color-caramel-300: #ffbd72;
+    --color-caramel-400: #fd963a;
+    --color-caramel-500: #fc7713;
+    --color-caramel-600: #ed5b09;
+    --color-caramel-700: #c4430a;
+    --color-caramel-800: #9c3610;
+    --color-caramel-900: #7d2e11;
+    --color-caramel-950: #441506;
+
+  --color-persimmon-50: #fff3f1;
+  --color-persimmon-100: #ffe4df;
+  --color-persimmon-200: #ffcec5;
+  --color-persimmon-300: #ffac9d;
+  --color-persimmon-400: #ff7c64;
+  --color-persimmon-500: #ff6347;
+  --color-persimmon-600: #ed3615;
+  --color-persimmon-700: #c8290d;
+  --color-persimmon-800: #a5260f;
+  --color-persimmon-900: #882614;
+  --color-persimmon-950: #4b0f04;
+
+
+  --color-russett-50: #f8f5f4;
+  --color-russett-100: #efe9e5;
+  --color-russett-200: #ded1ca;
+  --color-russett-300: #c9b2a8;
+  --color-russett-400: #b29085;
+  --color-russett-500: #a3786c;
+  --color-russett-600: #966860;
+  --color-russett-700: #815854;
+  --color-russett-800: #664846;
+  --color-russett-900: #543c3a;
+  --color-russett-950: #2c1e1e;
+
+  --color-viridian-50: #f1f8f5;
+--color-viridian-100: #ddeee5;
+--color-viridian-200: #bedccf;
+--color-viridian-300: #93c2b0;
+--color-viridian-400: #64a38d;
+--color-viridian-500: #40806c;
+--color-viridian-600: #316a59;
+--color-viridian-700: #275549;
+--color-viridian-800: #21443b;
+--color-viridian-900: #1c3832;
+--color-viridian-950: #0f1f1b;
+
+
+
 
   --color-yellow-100: #8e983f;
   --color-yellow-300: #edff66;
@@ -193,11 +354,11 @@ body:not(.page-transition) {
 }
 
 @utility floating-nav-black {
-  @apply bg-white/10 border border-white/20 backdrop-blur-sm rounded-4xl;
+  @apply !bg-crown-950;
 }
 
 @utility nav-hover-btn {
-  @apply relative ms-4 font-poppins text-xs uppercase text-blue-50 after:absolute after:-bottom-0.5 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-blue-50 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100 dark:after:bg-white cursor-pointer;
+  @apply relative ms-4 font-poppins text-xs uppercase  cursor-pointer;
 }
 
 
