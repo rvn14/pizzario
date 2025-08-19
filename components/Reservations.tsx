@@ -13,10 +13,10 @@ const Reservations = () => {
             </div>
 
             {/* Row 1, Col 2: Text block 1 */}
-            <div className="max-w-xl text-red-800 select-none md:pl-6">
+            <div className="max-w-xl text-crown-600 select-none md:pl-6">
                 <h2 className="text-3xl md:text-4xl font-bold font-abriel">Every Table Has</h2>
                 
-                <h1 className="text-4xl md:text-6xl font-oi -rotate-2 text-red-700 [text-shadow:0_10px_0_theme(colors.red.900)]">
+                <h1 className="text-4xl md:text-6xl font-oi -rotate-2 text-crown-600 [text-shadow:0_10px_0_theme(colors.crown.950)]">
                     STORIES
                 </h1>
                 <p className='font-abriel text-lg md:text-xl mt-4 text-cocoa-700'>
@@ -25,10 +25,10 @@ const Reservations = () => {
             </div>
 
             {/* Row 2, Col 1: Text block 2 */}
-            <div className="max-w-xl text-right text-red-800 select-none md:pr-6">
+            <div className="max-w-xl text-right text-crown-600 select-none md:pr-6">
                 <h2 className="text-3xl md:text-4xl font-bold font-abriel">Celebrate Life’s</h2>
                 
-                <h1 className="text-4xl md:text-6xl font-oi rotate-2 text-red-700 [text-shadow:0_10px_0_theme(colors.red.900)]">
+                <h1 className="text-4xl md:text-6xl font-oi rotate-2 text-crown-600 [text-shadow:0_10px_0_theme(colors.crown.950)]">
                     MOMENTS
                 </h1>
                 <p className='font-abriel text-lg md:text-xl mt-4 text-cocoa-700'>
@@ -44,7 +44,7 @@ const Reservations = () => {
         </div>
 
         <div className='mt-16 w-full flex flex-col items-center'>
-            <h2 className="text-3xl md:text-4xl font-bold font-abriel text-center text-red-800">Ready to Create Your Story?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold font-abriel text-center text-crown-800">Ready to Create Your Story?</h2>
             <p className='font-abriel text-lg md:text-xl mt-4 text-center max-w-2xl text-cocoa-700'>
                 Join us at Pizzario, where every meal is a memory waiting to be made. Reserve your table today and let the stories unfold!
             </p>
