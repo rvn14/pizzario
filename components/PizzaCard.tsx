@@ -124,7 +124,7 @@ export const PizzaCard: React.FC<{ pizza: Pizza }> =  ({ pizza }) => {
               <div className="flex items-center gap-2">
                 <Button
                   onClick={remove}
-                  className="bg-crown-50/10 hover:bg-crown-50/20 text-crown-50 rounded-full text-sm flex items-center justify-center cursor-pointer w-8 h-8 p-0"
+                  className="bg-persimmon-50/10 hover:bg-persimmon-50/20 text-persimmon-50 rounded-full text-sm flex items-center justify-center cursor-pointer w-8 h-8 p-0"
                   style={{ minWidth: "2rem", minHeight: "2rem" }}
                 >
                   {" "}
@@ -135,7 +135,7 @@ export const PizzaCard: React.FC<{ pizza: Pizza }> =  ({ pizza }) => {
                 </span>
                 <Button
                   onClick={add}
-                  className="bg-crown-50/10 hover:bg-crown-50/20 text-crown-50 rounded-full text-sm flex items-center justify-center cursor-pointer w-8 h-8 p-0"
+                  className="bg-persimmon-50/10 hover:bg-persimmon-50/20 text-persimmon-50 rounded-full text-sm flex items-center justify-center cursor-pointer w-8 h-8 p-0"
                   style={{ minWidth: "2rem", minHeight: "2rem" }}
                 >
                   {" "}
@@ -149,7 +149,7 @@ export const PizzaCard: React.FC<{ pizza: Pizza }> =  ({ pizza }) => {
               onValueChange={(value) => setSelected(value)}
               defaultValue="regular"
             >
-              <SelectTrigger className="w-full text-crown-50 focus:outline-none focus:ring-0 border-2 border-gray-500 rounded-md h-10">
+              <SelectTrigger className="w-full text-persimmon-50 focus:outline-none focus:ring-0 border-2 border-gray-500 rounded-md h-10">
                 <SelectValue placeholder="Regular" />
               </SelectTrigger>
               <SelectContent>
@@ -161,7 +161,7 @@ export const PizzaCard: React.FC<{ pizza: Pizza }> =  ({ pizza }) => {
 
           <Button
             onClick={handleOrder}
-            className="bg-crown-500 hover:bg-crown-500/80 w-full rounded-md text-md outline-0 mt-2 cursor-pointer transition duration-100 ease-in"
+            className="bg-persimmon-500 hover:bg-persimmon-500/80 w-full rounded-md text-md outline-0 mt-2 cursor-pointer transition duration-100 ease-in"
           >
             {item?.quantity ? `Add More (${item?.quantity})` : "Add to Cart"}
           </Button>

@@ -64,34 +64,32 @@ export function CartSheet() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button asChild variant="ghost" className="fixed bottom-0 bg-crown-700 text-crown-100 hover:text-crown-100 w-6 h-6 !p-6 hover:bg-crown-700/90 border-0 rounded-full cursor-pointer">
+        <Button asChild variant="ghost" className="fixed bottom-0 bg-persimmon-500 text-persimmon-100 hover:text-persimmon-100 w-6 h-6 !p-6 hover:bg-persimmon-500/90 border-0 rounded-full cursor-pointer">
           <div className="relative">
-            <ShoppingCartIcon className="w-6 h-6" />
-            {items.length > 0 && <div className="red-dot z-20 absolute top-0 -right-1 w-3 h-3 rounded-full"></div>}
+            <ShoppingCartIcon className="w-8 h-8" />
+            {items.length > 0 && <div className="red-dot z-90 absolute top-0 bg-red-500 -right-0.5 w-3 h-3 rounded-full"></div>}
           </div>
         </Button>
       </SheetTrigger>
-      <SheetContent className="min-w-[350px] max-w-[400px] p-0 flex flex-col bg-cocoa-100 shadow-2xl border border-cocoa-800 rounded-2xl z-90">
-        <SheetHeader className="bg-crown-700 text-crown-50 px-6 py-4 relative">
+      <SheetContent className="min-w-[350px] max-w-[400px] p-0 flex flex-col bg-shark-950 shadow-2xl border border-cocoa-800 rounded-2xl z-90">
+        <SheetHeader className="bg-wood-700 text-wood-50 px-6 py-4 relative">
           <div className='absolute inset-0 overflow-hidden mix-blend-screen select-none pointer-events-none z-10'>
               <Image src="/images/bg.jpg" alt="Hero Background" layout="fill" objectFit="cover" className="object-cover" />
           </div>
-          <SheetTitle className="text-2xl text-crown font-abriel font-bold tracking-wide ">Ordered Items</SheetTitle>
-          <SheetDescription className="text-crown-50/80">Review your selected items and proceed to checkout.</SheetDescription>
+          <SheetTitle className="text-2xl text-wood font-abriel font-bold tracking-wide ">Ordered Items</SheetTitle>
+          <SheetDescription className="text-wood-50/80">Review your selected items and proceed to checkout.</SheetDescription>
         </SheetHeader>
         <div className="flex-1 p-4 relative overflow-y-auto">
-
-          <div className='absolute inset-0 overflow-hidden mix-blend-screen select-none pointer-events-none z-90'>
-              <Image src="/images/bg.jpg" alt="Hero Background" layout="fill" objectFit="cover" className="object-cover" />
-          </div>
-          <ScrollArea className="h-full w-full rounded-md">
+          
+          
+          <ScrollArea className="h-full w-full rounded-md relative">
           
           <div className="divide-y divide-cocoa-500">
             {items.length === 0 ? (
               <div className="py-8 text-center text-cocoa-500">Your cart is empty.</div>
             ) : (
               items.map((item, idx) => (
-                <div key={ idx} className="flex items-center p-3 bg-cocoa-950">
+                <div key={ idx} className="flex items-center p-3 bg-cocoa-950 relative">
                   <Image src={item.image || "/images/pizzas/margherita.jpg"} alt={item.name || "Pizza"} width={48} height={48} className="rounded-lg object-cover mr-4" />
                   <div className="flex-1">
                     <div className="font-semibold text-lg text-cocoa-100">{item.name} {item.size && <span className="text-sm text-cocoa-300">({item.size})</span> }</div>
@@ -115,7 +113,7 @@ export function CartSheet() {
                             </div>
 
                         </div>
-                      <div className="text-crown-600 font-bold">${item.price?.toFixed(2) || "0.00"}</div>
+                      <div className="text-wood-600 font-bold">${item.price?.toFixed(2) || "0.00"}</div>
                       <div> <span className="text-cocoa-400">x</span> {item.quantity}</div>
                       <div className="font-bold text-green-500">${calculateSubtotal(item).toFixed(2) || "0.00"}</div>
                     </div>
@@ -135,17 +133,17 @@ export function CartSheet() {
           </div>
           </ScrollArea>
         </div>
-        <div className="px-6 py-4 border-t border-gray-500 bg-crown-700 relative">
+        <div className="px-6 py-4 border-t border-gray-500 bg-wood-700 relative">
             <div className='absolute inset-0 overflow-hidden mix-blend-screen select-none pointer-events-none z-10'>
               <Image src="/images/bg.jpg" alt="Hero Background" layout="fill" objectFit="cover" className="object-cover" />
           </div>
 
           <div className="flex justify-between items-center mb-4">
-            <span className="font-semibold text-lg text-crown-100">Total</span>
-            <span className="font-bold text-crown-100 text-xl">${totalPrice.toFixed(2)}</span>
+            <span className="font-semibold text-lg text-wood-100">Total</span>
+            <span className="font-bold text-wood-100 text-xl">${totalPrice.toFixed(2)}</span>
           </div>
           <SheetFooter className="flex gap-2">
-            <Button onClick={handleCheckout} type="button" className="flex-1 bg-crown-900 text-white hover:bg-crown-900/80 shadow focus:outline-none focus:ring-0 focus:ring-offset-0 cursor-pointer z-20">Checkout</Button>
+            <Button onClick={handleCheckout} type="button" className="flex-1 bg-wood-900 text-white hover:bg-wood-900/80 shadow focus:outline-none focus:ring-0 focus:ring-offset-0 cursor-pointer z-20">Checkout</Button>
             <SheetClose asChild>
               <Button
                 ref={sheetCloseRef}

@@ -5,13 +5,13 @@ import MenuButton from "./MenuButton";
 const Menu: React.FC = () => {
   return (
     <section className="w-full h-fit py-24 px-3 md:px-32 z-10 flex flex-col items-center relative">
-      <div className="max-w-lg mx-auto text-center text-crown-600 select-none">
+      <div className="max-w-lg mx-auto text-center text-wood-100 select-none">
         <h2 className="text-4xl md:text-6xl font-bold font-abriel ">OUR</h2>
         {/* single heading with Tailwind arbitrary text-shadow */}
-        <h1 className="text-5xl md:text-8xl font-oi -rotate-3 [text-shadow:0_10px_0_theme(colors.crown.950)]">
+        <h1 className="text-5xl md:text-8xl font-oi -rotate-3 [text-shadow:0_10px_0_theme(colors.wood.950)]">
           MENU
         </h1>
-        <p className="text-3xl text-crown-900 mt-4 font-abriel font-bold">
+        <p className="text-3xl text-wood-300 mt-4 font-abriel font-bold">
           Where time-honored recipes meet new creativity. Discover flavors that
           blend tradition with modern flair.
         </p>
@@ -26,10 +26,10 @@ const Menu: React.FC = () => {
               className="rounded-lg object-cover transition-transform duration-500 hover:scale-110"
             />
           </div>
-          <figcaption className="mt-3 text-sm uppercase tracking-widest font-poppins text-wood-900 select-none">
+          <figcaption className="mt-3 text-sm uppercase tracking-widest font-poppins text-wood-400 select-none">
             Pizza
           </figcaption>
-          <p className="mt-1 text-2xl font-abriel text-wood-700 text-center max-w-[260px]">
+          <p className="mt-1 text-2xl font-abriel text-wood-300 text-center max-w-[260px]">
             Classic wood-fired pizza topped with fresh tomato, mozzarella and
             basil.
           </p>
@@ -44,10 +44,10 @@ const Menu: React.FC = () => {
               className="rounded-lg object-cover transition-transform duration-500 hover:scale-110"
             />
           </div>
-          <figcaption className="mt-3 text-sm uppercase tracking-widest font-poppins text-wood-900 select-none">
+          <figcaption className="mt-3 text-sm uppercase tracking-widest font-poppins text-wood-400 select-none">
             Burger
           </figcaption>
-          <p className="mt-1 text-2xl font-abriel text-wood-700 text-center max-w-[260px]">
+          <p className="mt-1 text-2xl font-abriel text-wood-300 text-center max-w-[260px]">
             Juicy house-seasoned beef patty with crisp lettuce, tomato and
             signature sauce.
           </p>
@@ -62,10 +62,10 @@ const Menu: React.FC = () => {
               className="rounded-lg object-cover transition-transform duration-500 hover:scale-110"
             />
           </div>
-          <figcaption className="mt-3 text-sm uppercase tracking-widest font-poppins text-wood-900 select-none">
+          <figcaption className="mt-3 text-sm uppercase tracking-widest font-poppins text-wood-400 select-none">
             Desserts
           </figcaption>
-          <p className="mt-1 text-2xl font-abriel text-wood-700 text-center max-w-[260px]">
+          <p className="mt-1 text-2xl font-abriel text-wood-300 text-center max-w-[260px]">
             Indulgent sweets made daily - from tiramisu to seasonal fruit tarts.
           </p>
         </figure>
@@ -79,10 +79,10 @@ const Menu: React.FC = () => {
               className="rounded-lg object-cover transition-transform duration-500 hover:scale-110"
             />
           </div>
-          <figcaption className="mt-3 text-sm uppercase tracking-widest font-poppins text-wood-900 select-none">
+          <figcaption className="mt-3 text-sm uppercase tracking-widest font-poppins text-wood-400 select-none">
             Drinks
           </figcaption>
-          <p className="mt-1 text-2xl font-abriel text-wood-700 text-center max-w-[260px]">
+          <p className="mt-1 text-2xl font-abriel text-wood-300 text-center max-w-[260px]">
             Refreshing beverages, from classic sodas to crafted mocktails and
             coffee.
           </p>

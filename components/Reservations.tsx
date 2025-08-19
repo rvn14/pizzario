@@ -13,25 +13,25 @@ const Reservations = () => {
             </div>
 
             {/* Row 1, Col 2: Text block 1 */}
-            <div className="max-w-xl text-crown-600 select-none md:pl-6">
+            <div className="max-w-xl text-wood-300 select-none md:pl-6">
                 <h2 className="text-3xl md:text-4xl font-bold font-abriel">Every Table Has</h2>
                 
-                <h1 className="text-4xl md:text-6xl font-oi -rotate-2 text-crown-600 [text-shadow:0_10px_0_theme(colors.crown.950)]">
+                <h1 className="text-4xl md:text-6xl font-oi -rotate-2 text-persimmon-500 [text-shadow:0_10px_0_theme(colors.crown.950)]">
                     STORIES
                 </h1>
-                <p className='font-abriel text-lg md:text-xl mt-4 text-cocoa-700'>
+                <p className='font-abriel text-lg md:text-xl mt-4 text-cocoa-200'>
                     Where laughter is shared, milestones are celebrated, and memories are made. From the first slice to the last sip, each gathering writes its own chapter in a story of togetherness
                 </p>
             </div>
 
             {/* Row 2, Col 1: Text block 2 */}
-            <div className="max-w-xl text-right text-crown-600 select-none md:pr-6">
+            <div className="max-w-xl text-right text-wood-300 select-none md:pr-6">
                 <h2 className="text-3xl md:text-4xl font-bold font-abriel">Celebrate Life’s</h2>
                 
-                <h1 className="text-4xl md:text-6xl font-oi rotate-2 text-crown-600 [text-shadow:0_10px_0_theme(colors.crown.950)]">
+                <h1 className="text-4xl md:text-6xl font-oi rotate-2 text-persimmon-500 [text-shadow:0_10px_0_theme(colors.crown.950)]">
                     MOMENTS
                 </h1>
-                <p className='font-abriel text-lg md:text-xl mt-4 text-cocoa-700'>
+                <p className='font-abriel text-lg md:text-xl mt-4 text-cocoa-200'>
                     From intimate dinners to birthdays, anniversaries, and gatherings with friends — Pizzario is the perfect place to turn any meal into an unforgettable memory. Book a table and let us create the atmosphere, flavors, and joy that make your celebrations truly special.
                 </p>
             </div>
@@ -44,8 +44,8 @@ const Reservations = () => {
         </div>
 
         <div className='mt-16 w-full flex flex-col items-center'>
-            <h2 className="text-3xl md:text-4xl font-bold font-abriel text-center text-crown-600">Ready to Create Your Story?</h2>
-            <p className='font-abriel text-lg md:text-xl mt-4 text-center max-w-2xl text-cocoa-800'>
+            <h2 className="text-3xl md:text-4xl font-bold font-abriel text-center text-persimmon-500">Ready to Create Your Story?</h2>
+            <p className='font-abriel text-lg md:text-xl mt-4 text-center max-w-2xl text-cocoa-300'>
                 Join us at Pizzario, where every meal is a memory waiting to be made. Reserve your table today and let the stories unfold!
             </p>
         </div>

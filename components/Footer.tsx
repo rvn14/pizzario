@@ -12,7 +12,7 @@ export default function Footer() {
         style={{ backgroundImage: "url('/images/footer-bg.jpg')" }}
         aria-hidden="true"
       />
-      <div className="absolute inset-0 bg-crown-950/60" aria-hidden="true" />
+      <div className="absolute inset-0 bg-black" aria-hidden="true" />
 
       <div className="relative max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-crown-50">

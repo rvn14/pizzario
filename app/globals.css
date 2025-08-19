@@ -354,7 +354,7 @@ input[type="password"]::-webkit-input-password-visible {
 }
 
 @utility floating-nav-black {
-  @apply !bg-crown-950;
+  @apply !bg-shark-950;
 }
 
 @utility nav-hover-btn {

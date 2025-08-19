@@ -62,17 +62,17 @@ export const ItemCard: React.FC<{item: Item; type?: "dessert" | "beverage"}> = (
                             <div className='flex items-center gap-2'>
                                 <Button
                                     onClick={remove}
-                                    className='bg-crown-50/10 hover:bg-crown-50/20 text-crown-50 rounded-full flex items-center justify-center cursor-pointer w-6 h-6 p-0'
+                                    className='bg-persimmon-50/10 hover:bg-persimmon-50/20 text-persimmon-50 rounded-full flex items-center justify-center cursor-pointer w-6 h-6 p-0'
                                 ><Minus className="w-3 h-3" /></Button>
                                 <span className='text-gray-50 text-sm font-poppin font-light'>{quantity}</span>
                                 <Button
                                     onClick={add}
-                                    className='bg-crown-50/10 hover:bg-crown-50/20 text-crown-50 rounded-full flex items-center justify-center cursor-pointer w-6 h-6 p-0'
+                                    className='bg-persimmon-50/10 hover:bg-persimmon-50/20 text-persimmon-50 rounded-full flex items-center justify-center cursor-pointer w-6 h-6 p-0'
                                 ><Plus className="w-3 h-3" /></Button>
                             </div>
                         </div>
                     </div>
-                    <Button onClick={handleOrder} className='bg-crown-500 hover:bg-crown-500/80 w-full rounded-md text-md outline-0 mt-2 cursor-pointer transition duration-100 ease-in'>Order Now</Button>
+                    <Button onClick={handleOrder} className='bg-persimmon-500 hover:bg-persimmon-500/80 w-full rounded-md text-md outline-0 mt-2 cursor-pointer transition duration-100 ease-in'>Order Now</Button>
                 </div>
             </div>
         </div>
