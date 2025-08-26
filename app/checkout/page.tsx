@@ -2,7 +2,9 @@ import CheckoutTable from '@/components/CheckoutTable'
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import React from 'react'
-import Payment from '@/components/Payment';
+import CheckoutDetails from '@/components/CheckoutDetails';
+import { TransitionLink } from '@/components/utils/TransitionLink';
+import Image from 'next/image';
 
 
 const page = async () => {
@@ -24,23 +26,33 @@ const page = async () => {
   }
   
   return (
-    <div className="min-h-screen font-general bg-gradient-to-br from-zinc-950 to-zinc-900 flex items-center justify-center px-4 py-28">
-      <div className="w-full max-w-7xl h-full grid grid-cols-1 md:grid-cols-5 gap-0 shadow-2xl rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-md p-0 overflow-hidden">
-        {/* Cart Summary */}
-        <div className="flex flex-col justify-between bg-zinc-900/90 p-8 md:col-span-3 md:rounded-l-xl h-full">
-          <div>
-            <h2 className="text-2xl font-clash-semibold text-white/90 mb-6 tracking-wide">
-              Shopping Cart
-            </h2>
+    <section className='relative min-h-screen w-full flex flex-col items-center justify-center p-4 bg-white/3'>
+      <div className='fixed inset-0 overflow-hidden mix-blend-screen select-none pointer-events-none'>
+                <Image src="/images/bg.jpg" alt="Hero Background" layout="fill" objectFit="cover" className="object-cover opacity-50" />
+            </div>
+
+      <header className='w-full text-wood-50 p-4'>
+        <TransitionLink href={"/"} className="flex flex-col items-center">
+        <p className="font-ragas font-black text-3xl pointer-events-none select-none">
+          PIZZA
+          <span className="text-transparent bg-gradient-to-r from-anzac-400 to-anzac-300 bg-clip-text">
+            R.3IO
+          </span>
+        </p>
+          
+        </TransitionLink>
+      </header>
+        <div className='relative flex items-start gap-6 w-full max-w-7xl mt-4'>
+          <section className="flex-1">
+            <CheckoutDetails />
+          </section>
+          <section className="flex-1 sticky top-24">
             <CheckoutTable />
-          </div>
+            
+          </section>
+
         </div>
-        {/* Payment Section */}
-        <div className="md:col-span-2 w-full flex items-stretch h-full">
-          <Payment />
-        </div>
-      </div>
-    </div>
+    </section>
   )
 }
 

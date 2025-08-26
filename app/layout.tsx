@@ -16,14 +16,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-  className={`antialiased w-full min-h-screen overflow-x-hidden`}
-      >
-          <ReactLenis root />
+      <body className={`antialiased w-full min-h-screen overflow-x-hidden`}>
+        <ReactLenis root>
           {children}
           <Footer />
-          <Toaster />
-          <ReactLenis root />
+        </ReactLenis>
+        <Toaster />
       </body>
     </html>
   );

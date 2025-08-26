@@ -1,72 +1,97 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { useCartStore } from '@/lib/cartStore'
 import React from 'react'
-// shadcn table components
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, TableFooter } from "@/components/ui/table"
-import Image from "next/image"
-import { redirect } from 'next/navigation'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 const CheckoutTable = () => {
-
     const cartStore = useCartStore();
     const items = cartStore.items || [];
+    const router = useRouter();
 
     if (!items || items.length === 0) {
-        redirect('/menu')
-      }
+        // client-side redirect to menu if cart empty
+        if (typeof window !== 'undefined') router.push('/menu');
+        return null;
+    }
 
-    // Calculate subtotal for each item and total price
-    const totalPrice = items.reduce((total, item) => total + (item.price || 0) * (item.quantity || 1), 0);
+    const subtotal = items.reduce((total, item) => total + (item.price || 0) * (item.quantity || 1), 0);
+    const taxes = 0.00; // adjust tax calculation if needed
+    const totalPrice = subtotal + taxes;
+
+    const formatPrice = (n: number) => `$ ${n.toFixed(2)} USD`;
+
+    function handlePlaceOrder() {
+        // TODO: replace with real order creation flow
+        console.log('Placing order', { items, subtotal, taxes, totalPrice });
+        router.push('/thank-you');
+    }
 
     return (
-        <Table className="bg-zinc-900 rounded-sm overflow-hidden shadow-2xl p-6 w-full text-lg">
-            <TableHeader>
-                <TableRow className="bg-zinc-800/80 hover:bg-zinc-800/80">
-                    <TableHead className="text-zinc-300 text-lg py-4">Image</TableHead>
-                    <TableHead className="text-zinc-300 text-lg py-4">Name</TableHead>
-                    <TableHead className="text-zinc-300 text-lg py-4">Size</TableHead>
-                    <TableHead className="text-zinc-300 text-lg py-4">Quantity</TableHead>
-                    <TableHead className="text-zinc-300 text-lg py-4">Price</TableHead>
-                    <TableHead className="text-zinc-300 text-lg py-4">Subtotal</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                {items.length === 0 ? (
-                    <TableRow>
-                        <TableCell colSpan={6} className="text-center text-zinc-500 py-20 text-xl">
-                            <span className="opacity-80">🛒 Your cart is empty.</span>
-                        </TableCell>
-                    </TableRow>
-                ) : (
-                    items.map((item, idx) => (
-                        <TableRow key={idx} className="hover:bg-zinc-800/60 transition-colors">
-                            <TableCell>
-                                <Image
-                                    src={item.image || "/images/pizzas/margherita.jpg"}
-                                    alt={item.name || "Pizza"}
-                                    width={64}
-                                    height={64}
-                                    className="rounded-lg object-cover shadow-lg"
-                                />
-                            </TableCell>
-                            <TableCell className="font-semibold text-white text-lg">{item.name}</TableCell>
-                            <TableCell className="text-zinc-400 text-lg">{item.size || "-"}</TableCell>
-                            <TableCell className="text-zinc-200 text-lg">{item.quantity}</TableCell>
-                            <TableCell className="text-tomato font-semibold text-lg">${item.price?.toFixed(2) || "0.00"}</TableCell>
-                            <TableCell className="text-tomato font-semibold text-lg">
-                                ${(item.price * item.quantity).toFixed(2)}
-                            </TableCell>
-                        </TableRow>
-                    ))
-                )}
-            </TableBody>
-            <TableFooter>
-                <TableRow className="bg-zinc-800 border-t border-zinc-800 hover:bg-zinc-800">
-                    <TableCell colSpan={5} className="text-lg text-zinc-400 font-medium">Subtotal</TableCell>
-                    <TableCell className="text-xl text-tomato font-bold">${totalPrice.toFixed(2)}</TableCell>
-                </TableRow>
-            </TableFooter>
-        </Table>
+        <section className="space-y-6">
+            {/* ITEMS IN ORDER */}
+            <div className="rounded-md  overflow-hidden">
+                <div className="bg-wood-900 text-wood-100 px-6 py-3 font-bold text-xl">ITEM(S) IN ORDER</div>
+                <div className="bg-wood-300 p-6">
+                    {items.map((item: any, idx: number) => (
+                        <div key={idx} className="flex items-center gap-4 mb-4 last:mb-0">
+                            {/* image */}
+                            <div className="w-20 h-20 rounded-md overflow-hidden flex-shrink-0 bg-pink-300">
+                                {item.image ? (
+                                    <Image src={item.image} alt={item.name || 'item'} width={80} height={80} className="object-cover" />
+                                ) : (
+                                    <div className="w-full h-full flex items-center justify-center text-xs text-wood-900 font-bold">
+                                        Image
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* details */}
+                            <div className="flex-1">
+                                <div className="text-wood-900 font-bold uppercase">{item.name || 'Item name'}</div>
+                                <div className="text-wood-900 text-sm mt-1">{item.size || ''}</div>
+                                <div className="text-wood-900 text-sm mt-1">QUANTITY: {item.quantity || 1}</div>
+                            </div>
+
+                            {/* price */}
+                            <div className="w-28 text-right text-wood-900 font-semibold">
+                                {formatPrice((item.price || 0) * (item.quantity || 1))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* ORDER SUMMARY */}
+            <div className="rounded-md overflow-hidden">
+                <div className="bg-wood-900 text-amber-100 px-6 py-3 font-bold text-xl">ORDER SUMMARY</div>
+                <div className="bg-wood-300 p-6">
+                    <div className="flex justify-between mb-2 text-wood-900">
+                        <div>SUBTOTAL</div>
+                        <div>{formatPrice(subtotal)}</div>
+                    </div>
+                    <div className="flex justify-between mb-4 text-wood-900">
+                        <div>TAXES</div>
+                        <div>{formatPrice(taxes)}</div>
+                    </div>
+                    <div className="flex justify-between items-center text-wood-900 font-bold text-lg">
+                        <div>TOTAL</div>
+                        <div className="text-2xl">{formatPrice(totalPrice)}</div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div>
+                <button
+                    onClick={handlePlaceOrder}
+                    className="w-full bg-wood-300 text-wood-900 font-bold py-4 rounded-full shadow-inner hover:opacity-90 cursor-pointer"
+                >
+                    PLACE ORDER
+                </button>
+            </div>
+        </section>
     )
 }
 

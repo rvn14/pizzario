@@ -9,28 +9,27 @@ import { Model } from "./Model";
 
 
 function MouseTracker({ rotateX }: { rotateX: number }) {
-  // Create a ref for a target vector to store our desired camera position
+
   const targetVec = useRef(new THREE.Vector3());
   const { camera, mouse } = useThree();
 
-  // Update camera position every frame based on mouse movements using lerp for smooth transitions
   useFrame(() => {
     
     const targetX = rotateX + mouse.x * 1.5;       
     const targetY = 3 + mouse.y * 1;       
     const targetZ = 14;                 
 
-    // Update the target vector's values
+
     targetVec.current.set(targetX, targetY, targetZ);
     
-    // Smoothly interpolate the camera's current position toward our target vector
+
     camera.position.lerp(targetVec.current, 0.05);
     
-    // Ensure the camera always looks at the center of the scene
+
     camera.lookAt(0, 0, 0);
   });
 
-  return null; // This component doesn't render any visible elements
+  return null; 
 }
 
 function Ground() {
@@ -61,7 +60,7 @@ const Scene = ({ rotateX }: SceneProps) => {
 
   return (
     <Canvas shadows="soft" gl={{ alpha: true }} camera={{ position: [0, 3, 14], fov: 15 }}>
-      {/* Integrate MouseTracker to update camera per frame */}
+
       <MouseTracker rotateX={rotateX} />
       <Suspense fallback={
         <Html center className="text-white fixed">

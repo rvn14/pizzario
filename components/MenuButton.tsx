@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import { TransitionLink } from './utils/TransitionLink';
 
 interface MenuButtonProps {
   children?: React.ReactNode;
@@ -9,7 +9,7 @@ interface MenuButtonProps {
 
 const MenuButton: React.FC<MenuButtonProps> = ({ children = 'Explore More', onClick, className = 'font-abriel' }) => {
   return (
-    <Link
+    <TransitionLink
       href="/menu"
       onClick={onClick}
       className={
@@ -38,7 +38,7 @@ const MenuButton: React.FC<MenuButtonProps> = ({ children = 'Explore More', onCl
       }
     >
       {children}
-    </Link>
+    </TransitionLink>
   );
 }
 
