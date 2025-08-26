@@ -8,7 +8,7 @@ import { FaSquareWhatsapp } from "react-icons/fa6";
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden p-8 bg-black flex flex-col">
+    <footer className="relative overflow-hidden p-8 bg-black flex flex-col items-center justify-center">
       <section className='container flex flex-col'>
         <div className="flex-grow"></div>
         <div className="flex items-center justify-between">

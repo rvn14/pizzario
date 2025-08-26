@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React, { Suspense, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { signupSchema, type SignupFormData } from '@/lib/rules';
-import Scene from '@/components/Scene';
 import { toast } from "sonner";
 import { Eye, EyeOff } from "lucide-react";
 import { TransitionLink } from '@/components/utils/TransitionLink';
+import Image from 'next/image';
 
 const SignupPage = () => {
   const router = useRouter();
@@ -69,11 +69,9 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br flex items-center justify-center px-4 md:px-16">
-      <div className="hidden md:flex h-screen w-1/2 items-center justify-center">
-        <Suspense>
-          <Scene rotateX={-3} />
-        </Suspense>
+    <div className="min-h-screen bg-gradient-to-br flex items-center justify-center">
+      <div className="hidden md:flex h-screen w-1/2 items-center justify-center relative">
+        <Image src="/images/cel1.png" alt="Background" layout="fill" objectFit="cover" className="object-cover" />
       </div>
       <div className="w-full md:w-1/2 flex items-center justify-center min-h-screen">
         <div className="w-full max-w-md bg-zinc-900/90 rounded-2xl p-8 shadow-2xl border border-zinc-800 backdrop-blur-md">

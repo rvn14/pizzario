@@ -1,12 +1,11 @@
-
 "use client";
 
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import Scene from "@/components/Scene";
 import { TransitionLink } from "@/components/utils/TransitionLink";
 import { Eye, EyeOff } from "lucide-react";
+import Image from "next/image";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -35,15 +34,9 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-gradient-to-br px-4 md:px-12">
+    <div className="min-h-screen flex flex-row items-center justify-center bg-gradient-to-br">
       {/* Scene/Left Side */}
-      <div className="hidden md:flex h-screen w-1/2 items-center justify-center">
-        <Suspense>
-          <Scene rotateX={-3} />
-        </Suspense>
-      </div>
-      {/* Form/Right Side */}
-      <div className="w-full md:w-1/2 flex items-center justify-center min-h-screen">
+      <div className="flex h-screen w-1/2 items-center justify-center">
         <div className="w-full max-w-md bg-zinc-900/90 rounded-2xl p-8 shadow-2xl border border-zinc-800 backdrop-blur-md">
           <div className="mb-7 text-center">
             <h2 className="text-3xl font-extrabold font-clash-semibold text-tomato mb-1 drop-shadow">
@@ -129,6 +122,12 @@ export default function LoginPage() {
               </span>
             </div>
           </form>
+        </div>
+      </div>
+      {/* Form/Right Side */}
+      <div className="flex h-screen w-1/2 items-center justify-center">
+        <div className="relative w-full h-full">
+          <Image src="/images/cel2.png" alt="Background" fill className="object-cover object-center" />
         </div>
       </div>
     </div>

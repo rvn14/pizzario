@@ -8,7 +8,7 @@ import { Model } from "./Model";
 
 
 
-function MouseTracker({ rotateX }: { rotateX: number }) {
+function MouseTracker({ rotateX = 0 }: { rotateX: number }) {
 
   const targetVec = useRef(new THREE.Vector3());
   const { camera, mouse } = useThree();
