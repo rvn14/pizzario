@@ -27,9 +27,12 @@ export const ItemCard: React.FC<{item: Item; type?: "dessert" | "beverage"}> = (
 
     const getPrice = () => item.price * quantity;
 
+    const cartEntry = cartStore.items.find(cartItem => cartItem.id === item._id);
+
     const handleOrder = () => {
         const existingItem = cartStore.items.find(cartItem => cartItem.id === item._id);
         if (existingItem) {
+            // pass only the selected quantity (delta) so the store increments correctly
             cartStore.updateItemQuantity(item._id, quantity);
             return;
         }
@@ -72,7 +75,9 @@ export const ItemCard: React.FC<{item: Item; type?: "dessert" | "beverage"}> = (
                             </div>
                         </div>
                     </div>
-                    <Button onClick={handleOrder} className='bg-persimmon-500 hover:bg-persimmon-500/80 w-full rounded-md text-md outline-0 mt-2 cursor-pointer transition duration-100 ease-in'>Order Now</Button>
+                    <Button onClick={handleOrder} className='bg-persimmon-500 hover:bg-persimmon-500/80 w-full rounded-md text-md outline-0 mt-2 cursor-pointer transition duration-100 ease-in'>
+                        {cartEntry?.quantity ? `Add More (${cartEntry.quantity})` : "Order Now"}
+                    </Button>
                 </div>
             </div>
         </div>

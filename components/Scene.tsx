@@ -70,7 +70,7 @@ const Scene = ({ rotateX }: SceneProps) => {
         </Html>}>
         <color attach="background" args={['#050505']} />
         <fog attach="fog" args={['#050505', 15, 20]} />
-        <group position={[0, 0.3, 0]} scale={0.65}>
+        <group position={[0, 0, 0]} scale={0.65}>
           <Stage
             adjustCamera={false}
             intensity={0.4}

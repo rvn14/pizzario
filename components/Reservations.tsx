@@ -3,7 +3,7 @@ import React from 'react'
 
 const Reservations = () => {
   return (
-    <section className='max-w-7xl mx-auto px-6 py-20'>
+    <section className='max-w-7xl mx-auto px-6 py-20 bg-gradient-to-t from-black via-transparent to-transparent'>
         
         <div className='grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-8 items-center'>
             
@@ -43,12 +43,6 @@ const Reservations = () => {
             
         </div>
 
-        <div className='mt-16 w-full flex flex-col items-center'>
-            <h2 className="text-3xl md:text-4xl font-bold font-abriel text-center text-persimmon-500">Ready to Create Your Story?</h2>
-            <p className='font-abriel text-lg md:text-xl mt-4 text-center max-w-2xl text-cocoa-300'>
-                Join us at Pizzario, where every meal is a memory waiting to be made. Reserve your table today and let the stories unfold!
-            </p>
-        </div>
     </section>
   )
 }

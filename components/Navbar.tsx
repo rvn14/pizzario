@@ -144,7 +144,7 @@ const Navbar = () => {
                 <div className="hidden md:flex gap-8 font-abriel text-lg">
                   <TransitionLink href="/menu" className="hover:text-wood-50 transition-all duration-300">Menu</TransitionLink>
                   <TransitionLink href="/about" className="hover:text-wood-50 transition-all duration-300">About</TransitionLink>
-                  <TransitionLink href="/contact" className="hover:text-wood-50 transition-all duration-300">Contact</TransitionLink>
+                  <TransitionLink href="/reservations" className="hover:text-wood-50 transition-all duration-300">Reservations</TransitionLink>
                 </div>
                 <div className="hidden md:flex gap-8 font-abriel text-lg">
                   

@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 import { CartSheet } from "@/components/CartTable";
 import BackgroundSection from '@/components/BackgroundSection';
 import Reservations from "@/components/Reservations";
-import Scene from "@/components/Scene";
+import ModelScene from "@/components/ModelScene";
 
 
 const Home = () => {
@@ -24,10 +24,8 @@ const Home = () => {
       <Hero />
       <Menu />
       <BackgroundSection image="abbg.png" />
-      <Reservations />
-      <section className="w-full h-screen">
-        <Scene rotateX={0} />
-      </section>
+      <Reservations /> 
+      <ModelScene />
     </main>
   );
 };

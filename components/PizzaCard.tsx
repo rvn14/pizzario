@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { useState } from "react";
 import { Button } from "./ui/button";
@@ -50,38 +49,23 @@ export const PizzaCard: React.FC<{ pizza: Pizza }> =  ({ pizza }) => {
   };
 
   const handleOrder = async () => {
-    // Logic to handle order placement
-    console.log(
-      `Ordering  ${quantity} ${pizza.name} (${selected}) for $${getPrice().toFixed(
-        2
-      )}`
-    );
-    //check if pizza is already in cart
-    const existingItem = cartStore.items.find((item) => item.id === pizza._id && item.size === selected);
+    // per-unit price for storing in cart
+    const unitPrice = selected === "regular" ? pizza.price.priceReg : pizza.price.priceLg;
+
+    // check if pizza is already in cart (same size)
+    const existingItem = cartStore.items.find((i) => i.id === pizza._id && i.size === selected);
+
     if (existingItem) {
-      console.log("Item already in cart:", existingItem);
-      
-      // If it exists, update the quantity
-      
+      // pass only the selected quantity (delta) so the store increments correctly
       cartStore.updateItemQuantity(pizza._id, quantity);
-      
       return;
     }
 
-    // Add item to cart
-    console.log("Adding item to cart:", {
-      id: pizza._id,
-      name: pizza.name,
-      price: getPrice(),
-      quantity: quantity,
-      image: pizza.image,
-      size: selected,
-    });
-
+    // Add new item to cart with per-unit price
     cartStore.addItem({
       id: pizza._id,
       name: pizza.name,
-      price: getPrice(),
+      price: unitPrice,
       quantity: quantity,
       image: pizza.image,
       size: selected,
