@@ -1,11 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-// Adjust these paths to match your shadcn/ui exports
 import { Form, FormField, FormItem, FormLabel, FormControl } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { useFormStore } from '@/lib/formStore'
 
 type FormValues = {
   email: string
@@ -13,7 +13,7 @@ type FormValues = {
   street1: string
   street2?: string
   city: string
-  state?: string
+  province?: string
   zip: string
   country: string
   paymentMethod: 'cod' | 'online'
@@ -31,9 +31,9 @@ export default function CheckoutDetails() {
       street1: '',
       street2: '',
       city: '',
-      state: '',
+      province: '',
       zip: '',
-      country: 'United States',
+      country: 'Sri Lanka',
       paymentMethod: 'cod',
       cardNumber: '',
       expiration: '',
@@ -44,19 +44,26 @@ export default function CheckoutDetails() {
 
   const paymentMethod = form.watch('paymentMethod')
 
-  function onSubmit(values: FormValues) {
-    // replace with real submit handler
-    console.log('checkout details', values)
+  const formStore = useFormStore();
+
+  function onValueChange(values: FormValues) {
+    formStore.setFormValues(values);
   }
+
+  useEffect(() => {
+    const subscription = form.watch((values) => {
+      onValueChange(values as FormValues);
+    });
+    return () => subscription.unsubscribe();
+  }, [form, onValueChange]);
 
   return (
     <div className="w-full max-w-3xl space-y-6 font-poppins">
-      {/* CUSTOMER INFO */}
       <div className="rounded-md overflow-hidden">
         <div className="bg-wood-900 text-wood-100 px-6 py-3 font-bold text-lg">CUSTOMER INFO <span className="float-right text-xs opacity-80">*</span></div>
         <div className="bg-wood-300 p-6">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form className="space-y-4">
               <FormField
                 control={form.control}
                 name="email"
@@ -74,12 +81,11 @@ export default function CheckoutDetails() {
         </div>
       </div>
 
-      {/* SHIPPING ADDRESS */}
       <div className="rounded-md overflow-hidden">
         <div className="bg-wood-900 text-wood-100 px-6 py-3 font-bold text-lg">SHIPPING ADDRESS <span className="float-right text-xs opacity-80">*</span></div>
         <div className="bg-wood-300 p-6 space-y-4">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form className="space-y-4">
               <FormField
                 control={form.control}
                 name="fullName"
@@ -136,12 +142,12 @@ export default function CheckoutDetails() {
                 <div className="col-span-4">
                   <FormField
                     control={form.control}
-                    name="state"
+                    name="province"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm text-wood-900">STATE/PROVINCE</FormLabel>
                         <FormControl>
-                          <Input {...field} placeholder="Enter state" className="rounded-full bg-wood-200 border-amber-600" />
+                          <Input {...field} placeholder="Enter province" className="rounded-full bg-wood-200 border-amber-600" />
                         </FormControl>
                       </FormItem>
                     )}
@@ -163,26 +169,6 @@ export default function CheckoutDetails() {
                 </div>
               </div>
 
-              <FormField
-                control={form.control}
-                name="country"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm text-wood-900">COUNTRY*</FormLabel>
-                    <FormControl>
-                      <Select onValueChange={(v) => field.onChange(v)} defaultValue={field.value}>
-                        <SelectTrigger className="rounded-full bg-wood-200 w-full">
-                          <SelectValue placeholder="Select country" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="United States">Sri Lanka</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-
               <div className="flex justify-between items-center pt-2">
                 <div className="text-sm text-wood-900">* REQUIRED</div>
               </div>
@@ -191,12 +177,11 @@ export default function CheckoutDetails() {
         </div>
       </div>
 
-      {/* PAYMENT INFO */}
       <div className="rounded-md overflow-hidden">
         <div className="bg-wood-900 text-wood-100 px-6 py-3 font-bold text-lg">PAYMENT INFO <span className="float-right text-xs opacity-80">*</span></div>
         <div className="bg-wood-300 p-6 space-y-4">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form className="space-y-4">
               <FormField
                 control={form.control}
                 name="paymentMethod"
@@ -295,4 +280,5 @@ export default function CheckoutDetails() {
     </div>
   )
 }
+
 

@@ -4,28 +4,52 @@ import { useCartStore } from '@/lib/cartStore'
 import React from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { useFormStore } from '@/lib/formStore'
 
 const CheckoutTable = () => {
     const cartStore = useCartStore();
+    const formStore = useFormStore();
     const items = cartStore.items || [];
     const router = useRouter();
 
     if (!items || items.length === 0) {
-        // client-side redirect to menu if cart empty
         if (typeof window !== 'undefined') router.push('/menu');
         return null;
     }
 
     const subtotal = items.reduce((total, item) => total + (item.price || 0) * (item.quantity || 1), 0);
-    const taxes = 0.00; // adjust tax calculation if needed
+    const taxes = 0.00; 
     const totalPrice = subtotal + taxes;
 
     const formatPrice = (n: number) => `$ ${n.toFixed(2)} USD`;
 
-    function handlePlaceOrder() {
-        // TODO: replace with real order creation flow
-        console.log('Placing order', { items, subtotal, taxes, totalPrice });
-        router.push('/thank-you');
+    async function handlePlaceOrder() {
+        const orderData = {
+            items,
+            subtotal,
+            taxes,
+            totalPrice,
+            formValues: formStore.formValues
+        };
+        
+        try {
+            const response = await fetch('/api/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(orderData),
+            });
+
+            if (response.ok) {
+                console.log('Order placed and email sent successfully');
+                router.push('/');
+            } else {
+                console.error('Failed to send order email');
+            }
+        } catch (error) {
+            console.error('Error placing order:', error);
+        }
     }
 
     return (

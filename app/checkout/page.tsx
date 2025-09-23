@@ -8,6 +8,7 @@ import Image from 'next/image';
 
 
 const page = async () => {
+  
   try {
     // Check if user token available in cookies
     const cookieStore = await cookies();

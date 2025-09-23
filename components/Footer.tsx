@@ -55,11 +55,11 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <span className="text-anzac-400 mr-3 flex-shrink-0"><FiPhone size={20} /></span>
-                <a href="tel:+94123456789" className="hover:text-anzac-400 transition-colors duration-300">+94 123 456 789</a>
+                <Link href="tel:+94123456789" className="hover:text-anzac-400 transition-colors duration-300">+94 123 456 789</Link>
               </li>
               <li className="flex items-center">
                 <span className="text-anzac-400 mr-3 flex-shrink-0"><FiMail size={20} /></span>
-                <a href="mailto:contact@pizzario.com" className="hover:text-anzac-400 transition-colors duration-300">contact@pizzario.com</a>
+                <Link href="mailto:contact@pizzario.com" className="hover:text-anzac-400 transition-colors duration-300">contact@pizzario.com</Link>
               </li>
             </ul>
           </div>
@@ -73,18 +73,18 @@ export default function Footer() {
             </div>
              <h3 className="text-xl font-semibold mt-8 mb-4 uppercase tracking-wider">Follow Us</h3>
              <div className="flex items-center space-x-4">
-               <a href="#" aria-label="Facebook" className="text-wood-50 hover:text-anzac-400 transition-colors duration-300">
+               <Link href="#" aria-label="Facebook" className="text-wood-50 hover:text-anzac-400 transition-colors duration-300">
                  <FaFacebookF size={22} />
-               </a>
-               <a href="#" aria-label="Instagram" className="text-wood-50 hover:text-anzac-400 transition-colors duration-300">
+               </Link>
+               <Link href="#" aria-label="Instagram" className="text-wood-50 hover:text-anzac-400 transition-colors duration-300">
                  <FaInstagram size={22} />
-               </a>
-               <a href="#" aria-label="Twitter" className="text-wood-50 hover:text-anzac-400 transition-colors duration-300">
+               </Link>
+               <Link href="#" aria-label="Twitter" className="text-wood-50 hover:text-anzac-400 transition-colors duration-300">
                  <FaTwitter size={22} />
-               </a>
-               <a href="#" aria-label="WhatsApp" className="text-wood-50 hover:text-anzac-400 transition-colors duration-300">
+               </Link>
+               <Link href="#" aria-label="WhatsApp" className="text-wood-50 hover:text-anzac-400 transition-colors duration-300">
                  <FaWhatsapp size={22} />
-               </a>
+               </Link>
             </div>
           </div>
 
