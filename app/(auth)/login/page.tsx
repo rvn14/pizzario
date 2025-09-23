@@ -107,7 +107,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className={`w-full py-2 rounded-md text-lg font-bold bg-tomato hover:bg-tomato/90 text-white shadow-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-tomato focus:ring-offset-2 ${isLoading ? "opacity-60" : ""}`}
+              className={`w-full py-2 rounded-md text-lg font-bold bg-tomato hover:bg-tomato/90 text-white cursor-pointer shadow-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-tomato focus:ring-offset-2 ${isLoading ? "opacity-60" : ""}`}
             >
               {isLoading ? "Signing in..." : "Sign in"}
             </button>

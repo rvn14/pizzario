@@ -123,7 +123,7 @@ const CheckoutTable = () => {
                     {items.map((item: any, idx: number) => (
                         <div key={idx} className="flex items-center gap-4 mb-4 last:mb-0">
                             {/* image */}
-                            <div className="w-20 h-20 rounded-md overflow-hidden flex-shrink-0 bg-pink-300">
+                            <div className="w-20 h-20 rounded-md overflow-hidden flex-shrink-0 bg-wood-300">
                                 {item.image ? (
                                     <Image src={item.image} alt={item.name || 'item'} width={80} height={80} className="object-cover" />
                                 ) : (
