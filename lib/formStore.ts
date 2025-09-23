@@ -3,8 +3,8 @@ import { create } from "zustand";
 type FormValues = {
   email: string;
   fullName: string;
-  street1: string;
-  street2?: string;
+  address: string;
+  street?: string;
   city: string;
   province?: string;
   zip: string;
@@ -24,8 +24,8 @@ export const useFormStore = create<FormStore>((set) => ({
   formValues: {
     email: "",
     fullName: "",
-    street1: "",
-    street2: "",
+    address: "",
+    street: "",
     city: "",
     province: "",
     zip: "",

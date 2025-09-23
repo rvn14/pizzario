@@ -16,7 +16,7 @@ export async function POST(request: Request) {
 
 		const orderId = `ORD-${Date.now()}`;
 		const customerName = formValues?.fullName || 'Customer';
-		const address = `${formValues?.street1 || ''}${formValues?.street2 ? `, ${formValues.street2}` : ''}, ${formValues?.city || ''}, ${formValues?.province || ''} ${formValues?.zip || ''}`.trim();
+		const address = `${formValues?.address || ''}${formValues?.street ? `, ${formValues.street}` : ''}, ${formValues?.city || ''}, ${formValues?.province || ''} ${formValues?.zip || ''}`.trim();
 
 		const data = await resend.emails.send({
 			from: process.env.EMAIL_FROM ?? 'Pizzario <onboarding@resend.dev>',

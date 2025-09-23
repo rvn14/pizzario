@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { useCartStore } from '@/lib/cartStore'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useFormStore } from '@/lib/formStore'
+import { toast } from 'sonner'
 
 const CheckoutTable = () => {
     const cartStore = useCartStore();
@@ -12,8 +13,14 @@ const CheckoutTable = () => {
     const items = cartStore.items || [];
     const router = useRouter();
 
+    // redirect after render to avoid "Cannot update during render" errors
+    useEffect(() => {
+        if ((!items || items.length === 0) && typeof window !== 'undefined') {
+            router.push('/menu');
+        }
+    }, [items, router]);
+
     if (!items || items.length === 0) {
-        if (typeof window !== 'undefined') router.push('/menu');
         return null;
     }
 
@@ -23,7 +30,39 @@ const CheckoutTable = () => {
 
     const formatPrice = (n: number) => `$ ${n.toFixed(2)} USD`;
 
+    function validateFormValues(values: any) {
+        const required = ['email', 'fullName', 'address', 'city', 'zip', 'paymentMethod'];
+        if (!values) return required;
+        const missing = required.filter((key) => {
+            const v = values[key];
+            if (v === undefined || v === null) return true;
+            if (typeof v === 'string' && v.trim() === '') return true;
+            return false;
+        });
+
+        if (!missing.length && values.paymentMethod === 'online') {
+            const cardRequired = ['cardNumber', 'expiration', 'cvc'];
+            const missingCard = cardRequired.filter((key) => {
+                const v = values[key];
+                if (v === undefined || v === null) return true;
+                if (typeof v === 'string' && v.trim() === '') return true;
+                return false;
+            });
+            return missingCard;
+        }
+
+        return missing;
+    }
+
     async function handlePlaceOrder() {
+        
+        const missing = validateFormValues(formStore.formValues);
+        if (missing.length > 0) {
+            toast.error(`Please complete: ${missing.join(', ')}`);
+            if (typeof window !== 'undefined') router.push('/checkout');
+            return;
+        }
+
         const orderData = {
             items,
             subtotal,
@@ -33,6 +72,12 @@ const CheckoutTable = () => {
         };
         
         try {
+            
+            if (formStore.formValues.paymentMethod === 'online') {
+                alert('Online payment is not implemented yet. Please select Cash on Delivery.');
+                return;
+            }
+
             const response = await fetch('/api/send', {
                 method: 'POST',
                 headers: {
@@ -43,12 +88,29 @@ const CheckoutTable = () => {
 
             if (response.ok) {
                 console.log('Order placed and email sent successfully');
+                toast.success('Order placed successfully! A confirmation email has been sent.');
+                cartStore.clearCart();
+                formStore.setFormValues({
+                    email: '',
+                    fullName: '',
+                    address: '',
+                    street: '',
+                    city: '',
+                    zip: '',
+                    paymentMethod: 'cod',
+                    cardNumber: '',
+                    expiration: '',
+                    cvc: '',
+                    billingSame: true,
+                });
                 router.push('/');
             } else {
+                toast.error('Failed to place order. Please try again.');
                 console.error('Failed to send order email');
             }
         } catch (error) {
             console.error('Error placing order:', error);
+            toast.error('An unexpected error occurred. Please try again.');
         }
     }
 

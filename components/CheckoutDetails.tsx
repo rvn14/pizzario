@@ -2,16 +2,45 @@
 'use client'
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormField, FormItem, FormLabel, FormControl } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useFormStore } from '@/lib/formStore'
 
+// Zod schema: required fields and conditional card detail requirement for online payment
+const checkoutSchema = z
+  .object({
+    email: z.string().email(),
+    fullName: z.string().min(1),
+    address: z.string().min(1),
+    street: z.string().optional(),
+    city: z.string().min(1),
+    province: z.string().optional(),
+    zip: z.string().min(1),
+    country: z.string().min(1),
+    paymentMethod: z.enum(['cod', 'online']),
+    cardNumber: z.string().optional(),
+    expiration: z.string().optional(),
+    cvc: z.string().optional(),
+    billingSame: z.boolean().optional(),
+  })
+  .refine(
+    (data) =>
+      data.paymentMethod === 'cod' ||
+      (data.cardNumber && data.cardNumber.trim() !== '' && data.expiration && data.expiration.trim() !== '' && data.cvc && data.cvc.trim() !== ''),
+    {
+      message: 'Card details are required for online payment',
+      path: ['cardNumber'],
+    }
+  )
+
 type FormValues = {
   email: string
   fullName: string
-  street1: string
-  street2?: string
+  address: string
+  street?: string
   city: string
   province?: string
   zip: string
@@ -25,11 +54,13 @@ type FormValues = {
 
 export default function CheckoutDetails() {
   const form = useForm<FormValues>({
+    resolver: zodResolver(checkoutSchema),
+    mode: 'onChange',
     defaultValues: {
       email: '',
       fullName: '',
-      street1: '',
-      street2: '',
+      address: '',
+      street: '',
       city: '',
       province: '',
       zip: '',
@@ -46,16 +77,14 @@ export default function CheckoutDetails() {
 
   const formStore = useFormStore();
 
-  function onValueChange(values: FormValues) {
-    formStore.setFormValues(values);
-  }
-
   useEffect(() => {
     const subscription = form.watch((values) => {
-      onValueChange(values as FormValues);
+      if (form.formState.isValid) {
+        formStore.setFormValues(values as FormValues);
+      }
     });
     return () => subscription.unsubscribe();
-  }, [form, onValueChange]);
+  }, [form, formStore]);
 
   return (
     <div className="w-full max-w-3xl space-y-6 font-poppins">
@@ -101,7 +130,7 @@ export default function CheckoutDetails() {
 
               <FormField
                 control={form.control}
-                name="street1"
+                name="address"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm text-wood-900">STREET ADDRESS*</FormLabel>
@@ -114,7 +143,7 @@ export default function CheckoutDetails() {
 
               <FormField
                 control={form.control}
-                name="street2"
+                name="street"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
