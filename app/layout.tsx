@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { ReactLenis } from 'lenis/react';
 
 export const metadata: Metadata = {
-  title: "Pizzario",
+  title: "Pizzario - Taste the best pizza in town",
   description: "Taste the best pizza in town",
 };
 
