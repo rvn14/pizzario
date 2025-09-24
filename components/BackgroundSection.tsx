@@ -21,40 +21,49 @@ const BackgroundSection: React.FC<BackgroundSectionProps> = ({ image }) => {
         gsap.to(bgRef.current, {
             yPercent: 20, // move the taller image wrapper down as page scrolls
             ease: "none",
+            force3D: true, // Force hardware acceleration
             scrollTrigger: {
                 trigger: bgContRef.current,
                 start: "top bottom",
                 end: "bottom top",
-                scrub: true,
+                scrub: 1, // Add slight smoothing to reduce jank
+                invalidateOnRefresh: true, // Recalculate on resize
                 // markers: true, // enable for debugging
             },
         });
-  }, []);
 
-  return (
-    <section ref={bgContRef} className="w-full  h-[80vh] relative overflow-clip">
-      <div className="absolute inset-0 bg-bunting-950/10 backdrop-blur-[1px] z-10"></div>
+        // Cleanup on unmount
+        return () => {
+            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+        };
+    }, []);
 
-      {/* taller image wrapper for parallax */}
-      <div
-        ref={bgRef}
-        className="absolute left-0 top-0 w-full h-[130vh] -translate-y-[15vh] overflow-hidden z-0"
-        aria-hidden
-      >
-        <Image
-          src={`/images/${image}`}
-          alt="Background"
-          width={1920}
-          height={1080}
-          className="w-full h-full object-cover"
-        />
-      </div>
+    return (
+        <section ref={bgContRef} className="w-full h-[80vh] relative overflow-clip">
+            <div className="absolute inset-0 bg-bunting-950/10 z-10"></div>
 
-      <div className='absolute inset-0 flex flex-col items-center justify-center w-full h-full z-20'>
-        
-      </div>
-    </section>
-  );
+            <div
+                ref={bgRef}
+                className="absolute left-0 top-0 w-full h-[130vh] -translate-y-[15vh] overflow-hidden z-0 will-change-transform"
+                aria-hidden
+                style={{ transform: 'translate3d(0, 0, 0)' }} // Force hardware layer
+            >
+                <Image
+                    src={`/images/${image}`}
+                    alt="Background"
+                    width={1920}
+                    height={1080}
+                    className="w-full h-full object-cover"
+                    priority={false}
+                    quality={85}
+                />
+            </div>
+
+            <div className='absolute inset-0 flex flex-col items-center justify-center w-full h-full z-20'>
+                
+            </div>
+        </section>
+    );
 };
 
 export default BackgroundSection;
